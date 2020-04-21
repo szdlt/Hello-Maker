@@ -1,4 +1,4 @@
-/*  2020.0119.10:59
+/*  2020.0421.18:46
 redunce some useless function  for APP moldule
 load dependency
 "HelloMaker": "file:../pxt-HelloMaker"
@@ -24,13 +24,13 @@ namespace HelloMaker_显示类 {
     let lhRGBLight_: DlbitRGBLight.LHDlbitRGBLight;
 	
 	 export enum RGB {
-        //% block="RGB1"
+        //% block="彩灯1"
         RGB1 = 0,
-       //% block="RGB2"
+       //% block="彩灯2"
         RGB2 = 1
     }
 	
-    //% blockId="initRGBLight" block="RGB %rgb_id|RGB IO口 %dataPin"
+    //% blockId="initRGBLight" block="初始化 %rgb_id| %dataPin"
     //% weight=94
     export function initRGBLight(rgb_id:RGB,dataPin: DigitalPin) {
 		
@@ -51,7 +51,6 @@ namespace HelloMaker_显示类 {
              }	
 		}
        
-        clearLight();
     }
 
     //% blockId="setBrightness" block="set brightness %brightness"
@@ -123,10 +122,10 @@ namespace HelloMaker_传感器类 {
         OK = 1
     }
 	enum dataType {
-    //% block="湿度"
-    humidity,
-    //% block="温度"
-    temperature
+        //% blockId="humidity" block="湿度"
+         humidity,
+         //% blockId="temperature" block="温度"
+         temperature
 }
 
     let _temperature: number = -999.0
@@ -449,7 +448,7 @@ namespace HelloMaker_传感器类 {
         return (color == t);
     }
 	
-    //% block="温湿度传感器IO口：%dataPin"
+    //% block="温湿度传感器：%dataPin"
     //% pullUp.defl=true
     //% blockExternalInputs=true
     export function queryData(dataPin: DigitalPin) {
@@ -522,14 +521,14 @@ namespace HelloMaker_传感器类 {
     /**
     * Determind if last query is successful (checksum ok)
     */
-    //% block="温湿度传感器测量成功?"
+    //% block="温湿度传感器测量成功"
     export function readDataSuccessful(): boolean {
         return _readSuccessful
     }
 
 
 
-    //% block="声音传感器IO口：%dataPin|%value|声音"
+    //% block="声音传感器：%dataPin|%value|声音"
     export function Voice_Sensor(dataPin: DigitalPin,value: enVoice): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -541,7 +540,7 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% block="倾斜传感器IO口：%dataPin|%value|倾斜"
+    //% block="倾斜传感器：%dataPin|%value|倾斜"
     
     export function Incline_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
@@ -555,7 +554,7 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    //% block="烟雾传感器IO口：%dataPin|%value|烟雾"
+    //% block="烟雾传感器：%dataPin|%value|烟雾"
     export function Smog_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -568,7 +567,7 @@ namespace HelloMaker_传感器类 {
 
     }
     
-    //% block="触摸传感器IO口：%dataPin|%value|触摸"
+    //% block="触摸传感器：%dataPin|%value|触摸"
     export function Touch_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -580,7 +579,7 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% block="烟雾传感器IO口：%dataPin|%value|光照"
+    //% block="烟雾传感器：%dataPin|%value|光照"
   
     export function Photosensitive_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
@@ -593,7 +592,7 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% blockId=HelloMaker_Potentiometer block="Potentiometer return voltage"
+    //% blockId=HelloMaker_Potentiometer block="电位器数值"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -603,7 +602,7 @@ namespace HelloMaker_传感器类 {
            return  pins.analogReadPin(dataPin)*10/102 
                    
 	}
-    //% block="火焰传感器IO口：%dataPin|%value|火焰"
+    //% block="火焰传感器：%dataPin|%value|火焰"
    
     export function Flame_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
@@ -1073,7 +1072,7 @@ namespace HelloMaker_小车类 {
         //    else if (num == 6) { value6_past = value; }
     }
 	
-    //% blockId=HelloMaker_Avoid_Sensor block="红外避障传感器ID|num: %num|IO口 %dataPin|%value检测到障碍物"
+    //% blockId=HelloMaker_Avoid_Sensor block="红外避障传感器| %num| %dataPin|%value检测到障碍物" 
     //% weight=95
     //% blockGap=10
     //% color="#006400"
@@ -1305,7 +1304,7 @@ namespace HelloMaker_小车类 {
 		
     }
    }
-	//% blockId=CarModeState block="当前为避障模式?"
+	//% blockId=CarModeState block="当前为避障模式"
 	export function CarModeState(): boolean {
       
            return startAvoid
