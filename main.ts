@@ -1,4 +1,4 @@
-/*  2020.0421.18:46
+/*  2020.0119.10:59
 redunce some useless function  for APP moldule
 load dependency
 "HelloMaker": "file:../pxt-HelloMaker"
@@ -126,7 +126,7 @@ namespace HelloMaker_传感器类 {
          humidity,
          //% blockId="temperature" block="温度"
          temperature
-}
+       }
 
     let _temperature: number = -999.0
     let _humidity: number = -999.0
@@ -512,10 +512,9 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    
-    //% block="读取温湿度传感器测量结果 %data"
-    export function readData(data: dataType): number {
-        return data == dataType.humidity ? _humidity : _temperature
+    //% block="读取温湿度传感器%Measuredata测量结果"
+    export function readData(Measuredata: dataType): number {
+        return Measuredata == dataType.humidity ? _humidity : _temperature
     }
 
     /**
