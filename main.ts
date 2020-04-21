@@ -30,7 +30,7 @@ namespace HelloMaker_显示类 {
         RGB2 = 1
     }
 	
-    //% blockId="initRGBLight" block="RGB %rgb_id|RGB IO口 $dataPin"
+    //% blockId="initRGBLight" block="RGB %rgb_id|RGB IO口 %dataPin"
     //% weight=94
     export function initRGBLight(rgb_id:RGB,dataPin: DigitalPin) {
 		
@@ -448,12 +448,8 @@ namespace HelloMaker_传感器类 {
         }
         return (color == t);
     }
-
-    /**
-    * Query data from DHT11/DHT22 sensor. If you are using 4 pins/no PCB board versions, you'll need to pull up the data pin. 
-    * It is also recommended to wait 1 (DHT11) or 2 (DHT22) seconds between each query.
-    */
-    //% block="温湿度传感器IO口：$dataPin"
+	
+    //% block="温湿度传感器IO口：%dataPin"
     //% pullUp.defl=true
     //% blockExternalInputs=true
     export function queryData(dataPin: DigitalPin) {
@@ -517,10 +513,8 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    /**
-    * Read humidity/temperature data from lastest query of DHT11/DHT22
-    */
-    //% block="读取温湿度传感器测量结果 $data"
+    
+    //% block="读取温湿度传感器测量结果 %data"
     export function readData(data: dataType): number {
         return data == dataType.humidity ? _humidity : _temperature
     }
@@ -528,18 +522,14 @@ namespace HelloMaker_传感器类 {
     /**
     * Determind if last query is successful (checksum ok)
     */
-    //% block="测量成功?"
+    //% block="温湿度传感器测量成功?"
     export function readDataSuccessful(): boolean {
         return _readSuccessful
     }
 
 
 
-    //% blockId=HelloMaker_Voice_Sensor block="声音传感器IO口：$dataPin|%value|声音"
-    //% weight=100
-    //% blockGap=10
-    //% color="#87CEEB"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% block="声音传感器IO口：%dataPin|%value|声音"
     export function Voice_Sensor(dataPin: DigitalPin,value: enVoice): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -551,11 +541,8 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% blockId=HelloMaker_Incline_Sensor block=""倾斜传感器IO口：$dataPin|%value|倾斜"
-    //% weight=100
-    //% blockGap=10
-    //% color="#87CEEB"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% block="倾斜传感器IO口：%dataPin|%value|倾斜"
+    
     export function Incline_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -568,11 +555,7 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    //% blockId=HelloMaker_Smog_Sensor block=""烟雾传感器IO口：$dataPin|%value|烟雾"
-    //% weight=100
-    //% blockGap=10
-    //% color="#87CEEB"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% block="烟雾传感器IO口：%dataPin|%value|烟雾"
     export function Smog_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -585,11 +568,7 @@ namespace HelloMaker_传感器类 {
 
     }
     
-    //% blockId=HelloMaker_Touch_Sensor block=""触摸传感器IO口：$dataPin|%value|触摸"
-    //% weight=100
-    //% blockGap=10
-    //% color="#87CEEB"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% block="触摸传感器IO口：%dataPin|%value|触摸"
     export function Touch_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -601,11 +580,8 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% blockId=HelloMaker_Photosensitive_Sensor block=""烟雾传感器IO口：$dataPin|%value|光照"
-    //% weight=100
-    //% blockGap=10
-    //% color="#87CEEB"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% block="烟雾传感器IO口：%dataPin|%value|光照"
+  
     export function Photosensitive_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -627,11 +603,8 @@ namespace HelloMaker_传感器类 {
            return  pins.analogReadPin(dataPin)*10/102 
                    
 	}
-    //% blockId=HelloMaker_Flame_Sensor block="火焰传感器IO口：$dataPin|%value|火焰"
-    //% weight=100
-    //% blockGap=10
-    //% color="#87CEEB"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% block="火焰传感器IO口：%dataPin|%value|火焰"
+   
     export function Flame_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -1100,7 +1073,7 @@ namespace HelloMaker_小车类 {
         //    else if (num == 6) { value6_past = value; }
     }
 	
-    //% blockId=HelloMaker_Avoid_Sensor block="红外避障传感器ID|num: %num|IO口 $dataPin|%value检测到障碍物"
+    //% blockId=HelloMaker_Avoid_Sensor block="红外避障传感器ID|num: %num|IO口 %dataPin|%value检测到障碍物"
     //% weight=95
     //% blockGap=10
     //% color="#006400"
