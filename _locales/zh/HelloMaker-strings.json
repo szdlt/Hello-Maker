@@ -4,7 +4,6 @@
   "HelloMaker_显示类.showLight|block":"显示彩灯",
   "HelloMaker_显示类.clearLight|block":"关闭彩灯", 
   "HelloMaker_显示类.setBrightness|block":"设置彩灯亮度 %brightness",
-  "HelloMaker_传感器类.Voice_Sensor|block": "声音传感器|返回 %value",
   "HelloMaker_传感器类.checkCurrentColor|block": "检测颜色是否是 %color",
   "HelloMaker_传感器类.initColorSensor|block": "颜色传感器初始化",
   "HelloMaker_小车类.Ultrasonic_Car|block": "超声波快速测距(cm)",
