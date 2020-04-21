@@ -121,7 +121,7 @@ namespace HelloMaker_传感器类 {
         //% blockId="OK" block="正常"
         OK = 1
     }
-	enum dataType {
+	export enum dataType {
         //% blockId="humidity" block="湿度"
          humidity,
          //% blockId="temperature" block="温度"
