@@ -22,16 +22,35 @@ namespace HelloMaker_显示类 {
 
     let lhRGBLight: DlbitRGBLight.LHDlbitRGBLight;
     let lhRGBLight_: DlbitRGBLight.LHDlbitRGBLight;
-    //% blockId="initRGBLight" block="initRGBLight before use"
+	
+	 export enum RGB {
+        //% block="RGB1"
+        RGB1 = 0,
+       //% block="RGB2"
+        RGB2 = 1
+    }
+	
+    //% blockId="initRGBLight" block="RGB %rgb_id|RGB IO口 $dataPin"
     //% weight=94
-    export function initRGBLight() {
-        if (!lhRGBLight) {
-            lhRGBLight = DlbitRGBLight.create(DigitalPin.P16, 2, DlbitRGBPixelMode.RGB);
+    export function initRGBLight(rgb_id:RGB,dataPin: DigitalPin) {
+		
+		if(rgb_id == RGB.RGB1) {
+		
+				if (!lhRGBLight) {
+					lhRGBLight = DlbitRGBLight.create(dataPin, 1, DlbitRGBPixelMode.RGB);
+					
+					 lhRGBLight.clear();
+                    
+				}
         }
-
-        if (!lhRGBLight_) {
-            lhRGBLight_ = DlbitRGBLight.create(DigitalPin.P8, 1, DlbitRGBPixelMode.RGB);
-        }
+		else if(rgb_id == RGB.RGB2) {
+			
+			 if (!lhRGBLight_) {
+               lhRGBLight_ = DlbitRGBLight.create(dataPin, 1, DlbitRGBPixelMode.RGB);
+			   lhRGBLight_.clear();
+             }	
+		}
+       
         clearLight();
     }
 
@@ -47,11 +66,11 @@ namespace HelloMaker_显示类 {
     export function setPixelRGB(lightoffset: Lights, rgb: DlbitRGBColors) {
         if (lightoffset == 0) {
             lhRGBLight.setPixelColor(0, rgb, false);
-        //  lhRGBLight.setPixelColor(1, rgb, false);
+       
         }
         else if (lightoffset == 1) {
             lhRGBLight_.setPixelColor(0, rgb, false);
-			lhRGBLight.setPixelColor(1, rgb, false);
+			
         }
     }
 
@@ -61,11 +80,11 @@ namespace HelloMaker_显示类 {
 
         if (lightoffset == 0) {
             lhRGBLight.setPixelColor(0, rgb, false);
-         //   lhRGBLight.setPixelColor(1, rgb, false);
+        
         }
         else if (lightoffset == 1) {
             lhRGBLight_.setPixelColor(0, rgb, false);
-			lhRGBLight.setPixelColor(1, rgb, false);
+			
         }
     }
     //% weight=88 blockId=showLight block="Show light"
@@ -103,7 +122,16 @@ namespace HelloMaker_传感器类 {
         //% blockId="OK" block="正常"
         OK = 1
     }
-   
+	enum dataType {
+    //% block="湿度"
+    humidity,
+    //% block="温度"
+    temperature
+}
+
+    let _temperature: number = -999.0
+    let _humidity: number = -999.0
+    let _readSuccessful: boolean = false
     const APDS9960_I2C_ADDR = 0x39;
     const APDS9960_ID_1 = 0xA8;
     const APDS9960_ID_2 = 0x9C;
@@ -397,13 +425,7 @@ namespace HelloMaker_传感器类 {
         if (t == Colors.Red && r < b) {
             t = Colors.Blue;
         }
-        //          serial.writeNumber(r); 
-        //          serial.writeLine("->red");
-        //          serial.writeNumber(g); 
-        //          serial.writeLine("->green"); 
-        //          serial.writeNumber(b); 
-        //          serial.writeLine("->blue"); 
-
+        
         if (r > 6800 && g > 8000 && b > 12000) {
             t = Colors.White;
         }
@@ -427,15 +449,101 @@ namespace HelloMaker_传感器类 {
         return (color == t);
     }
 
-    //% blockId=HelloMaker_Voice_Sensor block="Voice_Sensor|value %value|声音"
+    /**
+    * Query data from DHT11/DHT22 sensor. If you are using 4 pins/no PCB board versions, you'll need to pull up the data pin. 
+    * It is also recommended to wait 1 (DHT11) or 2 (DHT22) seconds between each query.
+    */
+    //% block="温湿度传感器IO口：$dataPin"
+    //% pullUp.defl=true
+    //% blockExternalInputs=true
+    export function queryData(dataPin: DigitalPin) {
+
+        //initialize
+        let startTime: number = 0
+        let endTime: number = 0
+        let checksum: number = 0
+        let checksumTmp: number = 0
+        let dataArray: boolean[] = []
+        let resultArray: number[] = []
+        for (let index = 0; index < 40; index++) dataArray.push(false)
+        for (let index = 0; index < 5; index++) resultArray.push(0)
+        _humidity = -999.0
+        _temperature = -999.0
+        _readSuccessful = false
+
+        startTime = input.runningTimeMicros()
+
+        //request data
+        pins.digitalWritePin(dataPin, 0) //begin protocol
+        basic.pause(18)
+        pins.setPull(dataPin, PinPullMode.PullUp) //pull up data pin if needed
+        pins.digitalReadPin(dataPin)
+        control.waitMicros(20)
+        while (pins.digitalReadPin(dataPin) == 1);
+        while (pins.digitalReadPin(dataPin) == 0); //sensor response
+        while (pins.digitalReadPin(dataPin) == 1); //sensor response
+
+        //read data (5 bytes)
+        for (let index = 0; index < 40; index++) {
+            while (pins.digitalReadPin(dataPin) == 1);
+            while (pins.digitalReadPin(dataPin) == 0);
+            control.waitMicros(28)
+            //if sensor pull up data pin for more than 28 us it means 1, otherwise 0
+            if (pins.digitalReadPin(dataPin) == 1) dataArray[index] = true
+        }
+
+        endTime = input.runningTimeMicros()
+
+        //convert byte number array to integer
+        for (let index = 0; index < 5; index++)
+            for (let index2 = 0; index2 < 8; index2++)
+                if (dataArray[8 * index + index2]) resultArray[index] += 2 ** (7 - index2)
+
+        //verify checksum
+        checksumTmp = resultArray[0] + resultArray[1] + resultArray[2] + resultArray[3]
+        checksum = resultArray[4]
+        if (checksumTmp >= 512) checksumTmp -= 512
+        if (checksumTmp >= 256) checksumTmp -= 256
+        if (checksum == checksumTmp) _readSuccessful = true
+
+        //read data if checksum ok
+        if (_readSuccessful) {
+            
+              //DHT11
+                _humidity = resultArray[0] + resultArray[1] / 100
+                _temperature = resultArray[2] + resultArray[3] / 100
+            
+        }
+
+    }
+
+    /**
+    * Read humidity/temperature data from lastest query of DHT11/DHT22
+    */
+    //% block="读取温湿度传感器测量结果 $data"
+    export function readData(data: dataType): number {
+        return data == dataType.humidity ? _humidity : _temperature
+    }
+
+    /**
+    * Determind if last query is successful (checksum ok)
+    */
+    //% block="测量成功?"
+    export function readDataSuccessful(): boolean {
+        return _readSuccessful
+    }
+
+
+
+    //% blockId=HelloMaker_Voice_Sensor block="声音传感器IO口：$dataPin|%value|声音"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Voice_Sensor(value: enVoice): boolean {
+    export function Voice_Sensor(dataPin: DigitalPin,value: enVoice): boolean {
 
-        pins.setPull(DigitalPin.P3, PinPullMode.PullUp);
-        if (pins.digitalReadPin(DigitalPin.P3) == value) {
+        pins.setPull(dataPin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(dataPin) == value) {
             return true;
         }
         else {
@@ -443,16 +551,15 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% blockId=HelloMaker_Incline_Sensor block="Incline_Sensor|%value|倾斜"
+    //% blockId=HelloMaker_Incline_Sensor block=""倾斜传感器IO口：$dataPin|%value|倾斜"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Incline_Sensor(value: enIR): boolean {
+    export function Incline_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
-        pins.setPull(DigitalPin.P9, PinPullMode.PullUp);
-        //IR_send_38k();
-        if (pins.digitalReadPin(DigitalPin.P9) == value) {
+        pins.setPull(dataPin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(dataPin) == value) {
             return true;
         }
         else {
@@ -461,15 +568,15 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    //% blockId=HelloMaker_Smog_Sensor block="Smog_Sensor|%value|烟雾"
+    //% blockId=HelloMaker_Smog_Sensor block=""烟雾传感器IO口：$dataPin|%value|烟雾"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Smog_Sensor(value: enIR): boolean {
+    export function Smog_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
-        pins.setPull(DigitalPin.P3, PinPullMode.PullUp);
-        if (pins.digitalReadPin(DigitalPin.P3) == value) {
+        pins.setPull(dataPin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(dataPin) == value) {
             return true;
         }
         else {
@@ -477,15 +584,16 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% blockId=HelloMaker_Humidity_Sensor block="Humidity_Sensor|土壤湿度|%value"
+    
+    //% blockId=HelloMaker_Touch_Sensor block=""触摸传感器IO口：$dataPin|%value|触摸"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Humidity_Sensor(value: enOK): boolean {
+    export function Touch_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
-        pins.setPull(DigitalPin.P3, PinPullMode.PullUp);
-        if (pins.digitalReadPin(DigitalPin.P3) == value) {
+        pins.setPull(dataPin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(dataPin) == value) {
             return false;
         }
         else {
@@ -493,34 +601,15 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-
-
-
-    //% blockId=HelloMaker_Touch_Sensor block="Touch_Sensor|%value|触摸"
+    //% blockId=HelloMaker_Photosensitive_Sensor block=""烟雾传感器IO口：$dataPin|%value|光照"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Touch_Sensor(value: enIR): boolean {
+    export function Photosensitive_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
-        pins.setPull(DigitalPin.P9, PinPullMode.PullUp);
-        if (pins.digitalReadPin(DigitalPin.P9) == value) {
-            return false;
-        }
-        else {
-            return true;
-        }
-
-    }
-    //% blockId=HelloMaker_Photosensitive_Sensor block="Photosensitive_Sensor|%value|光照"
-    //% weight=100
-    //% blockGap=10
-    //% color="#87CEEB"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Photosensitive_Sensor(value: enIR): boolean {
-
-        pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
-        if (pins.digitalReadPin(DigitalPin.P8) == value) {
+        pins.setPull(dataPin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(dataPin) == value) {
             return true;
         }
         else {
@@ -533,79 +622,26 @@ namespace HelloMaker_传感器类 {
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Potentiometer():number {
+    export function Potentiometer(dataPin: AnalogPin):number {
         
-           return  pins.analogReadPin(AnalogPin.P1)*10/102 
+           return  pins.analogReadPin(dataPin)*10/102 
                    
 	}
-    //% blockId=HelloMaker_Flame_Sensor block="Flame_Sensor|%value|火焰"
+    //% blockId=HelloMaker_Flame_Sensor block="火焰传感器IO口：$dataPin|%value|火焰"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Flame_Sensor(value: enIR): boolean {
+    export function Flame_Sensor(dataPin: DigitalPin,value: enIR): boolean {
 
-        pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
-        if (pins.digitalReadPin(DigitalPin.P8) == value) {
+        pins.setPull(dataPin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(dataPin) == value) {
             return true;
         }
         else {
             return false;
         }
     } 
-}
-
-/*****************************************************************************************************************************************
- *    音乐类 *****************************************************************************************************************************
- ****************************************************************************************************************************************/
-
-//% color="#D2691E" weight=22 icon="\uf001"
-namespace HelloMaker_音乐类 {
-    export enum enBuzzer {
-        //% blockId="NoBeep" block="不响"
-        NoBeep = 0,
-        //% blockId="Beep" block="响"
-        Beep
-    }
-    //% blockId=HelloMaker_Buzzer block="Buzzer"
-    //% weight=100
-    //% blockGap=10 
-    //% color="#D2691E"
-    //% value.min=0 value.max=1
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=8
-    export function Buzzer(): void {
-        pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
-        pins.digitalWritePin(DigitalPin.P0, 0);
-    }
-}
-/*****************************************************************************************************************************************
- *电机类 *****************************************************************************************************************************
- ****************************************************************************************************************************************/
-
-//% color="#0000CD" weight=21 icon="\uf185"
-
-namespace HelloMaker_电机类 {
-
-    //% blockId=HelloMaker_Vibrator_Open block="Vibrator_Open"
-    //% weight=100
-    //% blockGap=10
-    //% color="#0000CD"
-    //% value.min=0 value.max=1023
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
-    export function Vibrator_Open(): void {
-
-        pins.digitalWritePin(DigitalPin.P12, 1);
-
-    }
-    //% blockId=HelloMaker_Vibrator_Close block="Vibrator_Close"
-    //% weight=100
-    //% blockGap=10
-    //% color="#0000CD"
-    //% value.min=0 value.max=1023
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
-    export function Vibrator_Close(): void {
-        pins.digitalWritePin(DigitalPin.P12, 0);
-    }
 }
 
 //% color="#006400" weight=20 icon="\uf1b9"
@@ -951,12 +987,12 @@ namespace HelloMaker_小车类 {
         //pins.analogWritePin(AnalogPin.P1, 1023-speed);
     }
     function Car_SpeedUp() {
-        if (car_speed <= 250)
-            car_speed += 5;
+        if (car_speed <= 240)
+            car_speed += 10;
     }
     function Car_SpeedDown() {
         if (car_speed >= 50)
-            car_speed -= 5;
+            car_speed -= 10;
     }
 
     //% blockId=HelloMaker_ultrasonic_car block="超声波快速测距得到的结果为(cm)"
@@ -1001,7 +1037,7 @@ namespace HelloMaker_小车类 {
 		}
 
 
-    //% blockId=HelloMaker_Servo_Car block="Servo_Car|num %num|value %value |速度 %speed"
+    //% blockId=HelloMaker_Servo_Car block="Servo_Car|num %num|%value |速度 %speed"
     //% weight=96
     //% blockGap=10
     //% speed.min=1 speed.max=10
@@ -1064,17 +1100,18 @@ namespace HelloMaker_小车类 {
         //    else if (num == 6) { value6_past = value; }
     }
 	
-    //% blockId=HelloMaker_Avoid_Sensor block="Avoid_Sensor|num: %num|value %value"
+    //% blockId=HelloMaker_Avoid_Sensor block="红外避障传感器ID|num: %num|IO口 $dataPin|%value检测到障碍物"
     //% weight=95
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
-    export function Avoid_Sensor(num: NumAvoidSensor, value: enAvoidState): boolean {
+    export function Avoid_Sensor(num: NumAvoidSensor, dataPin: DigitalPin,value: enAvoidState): boolean {
         let temp: boolean = false;
+		pins.setPull(dataPin, PinPullMode.PullUp);
         switch (value) {
             case enAvoidState.OBSTACLE: {
                 if (num == NumAvoidSensor.Sensor1) {
-                    if (pins.analogReadPin(AnalogPin.P1) < 800) {
+                    if (pins.digitalReadPin(dataPin) == 0) {
                         temp = true;
                     }
                     else {
@@ -1082,7 +1119,7 @@ namespace HelloMaker_小车类 {
                     }
                 }
                 else if (num == NumAvoidSensor.Sensor2) {
-                    if (pins.analogReadPin(AnalogPin.P2) < 800) {
+                    if (pins.digitalReadPin(dataPin) == 0) {
                         temp = true;
                     }
                     else {
@@ -1093,7 +1130,7 @@ namespace HelloMaker_小车类 {
             }
             case enAvoidState.NOOBSTACLE: {
                 if (num == NumAvoidSensor.Sensor1) {
-                    if (pins.analogReadPin(AnalogPin.P1) > 800) {
+                    if (pins.digitalReadPin(dataPin) == 1) {
                         temp = true;
                     }
                     else {
@@ -1101,7 +1138,7 @@ namespace HelloMaker_小车类 {
                     }
                 }
                 else if (num == NumAvoidSensor.Sensor2) {
-                    if (pins.analogReadPin(AnalogPin.P2) > 800) {
+                    if (pins.digitalReadPin(dataPin) == 1) {
                         temp = true;
                     }
                     else {
@@ -1113,7 +1150,7 @@ namespace HelloMaker_小车类 {
         }
         return temp;
     }
-    //% blockId=HelloMaker_Line_Sensor block="Line_Sensor|direct %direct|value %value"
+    //% blockId=HelloMaker_Line_Sensor block="Line_Sensor|direct %direct|%value"
     //% weight=94
     //% blockGap=10
     //% color="#006400"
@@ -1582,11 +1619,6 @@ namespace HelloMaker_积木类 {
             SerialPin.P13,
             SerialPin.P12,
             BaudRate.BaudRate9600)
-        HelloMaker_传感器类.initColorSensor()
-        HelloMaker_显示类.initRGBLight()
-        HelloMaker_显示类.setPixelRGB(Lights.Light1, DlbitRGBColors.Red)
-        HelloMaker_显示类.setPixelRGB(Lights.Light2, DlbitRGBColors.Red)
-        HelloMaker_显示类.showLight()
         HelloMaker_小车类.CarCtrl(HelloMaker_小车类.CarState.Car_Stop)
         HelloMaker_小车类.Servo_Car(HelloMaker_小车类.enServo.S1, 90, 0)
         HelloMaker_小车类.Servo_Car(HelloMaker_小车类.enServo.S2, 90, 0)
