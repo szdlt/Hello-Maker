@@ -1,8 +1,4 @@
-/*  2020.0119.10:59
-redunce some useless function  for APP moldule
-load dependency
-"HelloMaker": "file:../pxt-HelloMaker"
-*/
+/*  2020.0422.16:04   */
 
  enum Colors {
         //% blockId="Red" block="红色"
@@ -601,6 +597,20 @@ namespace HelloMaker_传感器类 {
            return  pins.analogReadPin(dataPin)*10/102 
                    
 	}
+	
+	//% block="按键模块：%dataPin|%value|按下"
+    export function KeyDetect(dataPin: DigitalPin,value: enIR):boolean {
+        
+        pins.setPull(dataPin, PinPullMode.PullUp);
+        if (pins.digitalReadPin(dataPin) == value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+                   
+	}
+	
     //% block="火焰传感器：%dataPin|%value|火焰"
    
     export function Flame_Sensor(dataPin: DigitalPin,value: enIR): boolean {
