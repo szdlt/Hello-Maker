@@ -1387,7 +1387,7 @@ namespace HelloMaker_小车类 {
     }
 }
 
-//% color="#800080" weight=24 icon="\uf1b6"
+//% color="#FFFF00" weight=24 icon="\uf38d"
 namespace HelloMaker_积木类 {
 
     let StrAt = -1
@@ -1413,9 +1413,10 @@ namespace HelloMaker_积木类 {
     export let Move_T = -1
     let stringReceive = ""
     let dl_CarSpeed = 80
-    let Tone = [65, 65, 73, 82, 87, 98, 110, 123]
+    let Tone = [2093,2093, 2349, 2637, 2794, 3136, 3520, 3951]
 
     /*
+	65, 73, 82, 87, 98, 110, 123，
     131, 147, 165, 175, 196, 220, 247,
     262, 294, 330, 349, 392, 440, 494,
     523, 587, 659, 698, 784, 880, 988,
@@ -1908,6 +1909,7 @@ namespace HelloMaker_积木类 {
                 case 't' + 'o' + 'n':
 
                     tone = parseInt(uartData.substr(start_num + 6, 2))
+					tone = (tone -1)%7
                     dlbot_beat = parseInt(uartData.substr(start_num + 9, 1))
                     cmdType = CMD_TYPE.TON
 
