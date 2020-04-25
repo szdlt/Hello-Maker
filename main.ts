@@ -1387,7 +1387,7 @@ namespace HelloMaker_小车类 {
     }
 }
 
-//% color="#212121" weight=24 icon="\uf1b6"
+//% color="#800080" weight=24 icon="\uf1b6"
 namespace HelloMaker_积木类 {
 
     let StrAt = -1
@@ -1445,7 +1445,7 @@ namespace HelloMaker_积木类 {
         TEM,
         //% block="寻迹传感器状态"
         STA,
-        //% block="//% block="手机编程-PWM舵机""
+        //% block="手机编程-PWM舵机""
         SERVO_MOVE,
         //% block="控制单舵机"
         SERVO_ONE,
@@ -1561,7 +1561,6 @@ namespace HelloMaker_积木类 {
     //% blockId=HelloMaker_SendRGBColor block="SendRGBColor"
     //% weight=96
     //% blockGap=10
-    //% color="#006400"
     //% objColor.min=1 objColor.max=3
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function SendRGBColor(objColor: Colors) {
@@ -1576,7 +1575,6 @@ namespace HelloMaker_积木类 {
     //% blockId=HelloMaker_SendBarrierDistance block="SendBarrierDistance"
     //% weight=96
     //% blockGap=10
-    //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function SendBarrierDistance(distance: number) {
 
@@ -1591,7 +1589,6 @@ namespace HelloMaker_积木类 {
     //% blockId=HelloMaker_BuildingBlocksInit block="BuildingBlocksInit"
     //% weight=96
     //% blockGap=10
-    //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function BuildingBlocksInit() {
 
@@ -1793,10 +1790,9 @@ namespace HelloMaker_积木类 {
     //% blockId=HelloMaker_BuildingBlocks block="BuildingBlocks|%uartData"
     //% weight=96
     //% blockGap=10
-    //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
 
-    export function BuildingBlocks(uartData: string): number {
+    export function BuildingBlocks(uartData: string) {
 
         let start_num = uartData.indexOf("*@")
         if (start_num != -1) {
@@ -1950,9 +1946,8 @@ namespace HelloMaker_积木类 {
                     break
             }
 
-            return cmdType
         }
-        return -1
+      
     }
 
 
