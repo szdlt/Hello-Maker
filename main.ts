@@ -1635,7 +1635,7 @@ namespace HelloMaker_积木类 {
 
         }
 
-        SendMoveTypeToMcu(Move_T)
+      //  SendMoveTypeToMcu(Move_T)
 
     }
     //% blockId=ServoOne block="蓝牙-单舵机运动"
