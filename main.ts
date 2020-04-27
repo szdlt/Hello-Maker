@@ -1387,7 +1387,7 @@ namespace HelloMaker_小车类 {
     }
 }
 
-//% color="#0000FF" weight=24 icon="\uf085"
+//% color="#0000C8" weight=24 icon="\uf085"
 namespace HelloMaker_积木类 {
 
     let StrAt = -1
