@@ -1424,7 +1424,7 @@ namespace HelloMaker_积木类 {
     2093, 2349, 2637, 2794, 3136, 3520, 3951,
     4186, 4699]
     */
-    let Beat = [16, 16, 8, 4, 2, 1, 32, 64]
+   // let Beat = [16, 16, 8, 4, 2, 1, 32, 64]
     export enum CMD_TYPE {
         //% block="手机编程-直行"
         MST,
@@ -1761,7 +1761,9 @@ namespace HelloMaker_积木类 {
 	//% blockId=AppProgramMusic block="手机编程-音调"
     export function AppProgramMusic() {
 
-        music.playTone(Tone[tone], Beat[dlbot_beat])
+    //    music.playTone(Tone[tone], Beat[dlbot_beat])
+	     music.playTone(Tone[tone], 1)
+
 
     }
 	
