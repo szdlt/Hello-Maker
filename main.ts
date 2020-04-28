@@ -1438,10 +1438,12 @@ namespace HelloMaker_积木类 {
         TON,
         //% block="手机编程-版本号"
         VER,
+		/*
         //% block="手机编程-数字显示"
         POS,
         //% block="显示屏-字符显示"
         SEN,
+		*/
         //% block="手机编程-温度"
         TEM,
         //% block="寻迹传感器状态"
@@ -1732,6 +1734,7 @@ namespace HelloMaker_积木类 {
         HelloMaker_小车类.Servo_Car(dlbot_id, dlbot_pos, dlbot_speed)
 
     }
+	
     //% blockId=AppProgramBusServo block="手机编程-总线舵机运动"
     export function AppProgramBusServo() {
 
@@ -1750,6 +1753,7 @@ namespace HelloMaker_积木类 {
         bluetooth.uartWriteString("*@HelloMakerbit_V0#")
 
     }
+	/*
     //% blockId=AppProgramShowNumber block="手机编程-数字显示"
     export function AppProgramShowNumber() {
         basic.showNumber(show_number)
@@ -1758,6 +1762,7 @@ namespace HelloMaker_积木类 {
     export function AppProgramShowString() {
         basic.showString(stringReceive)
     }
+	*/
     //% blockId=AppProgramxunjiState block="手机编程-寻迹传感器状态"
     export function AppProgramxunjiState() {
 
