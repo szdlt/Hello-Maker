@@ -1757,7 +1757,7 @@ namespace HelloMaker_积木类 {
     export function AppProgramShowString() {
         basic.showString(stringReceive)
     }
-	
+	*/
 	//% blockId=AppProgramMusic block="手机编程-音调"
     export function AppProgramMusic() {
 
@@ -1765,7 +1765,7 @@ namespace HelloMaker_积木类 {
 
     }
 	
-	*/
+	
     //% blockId=AppProgramxunjiState block="手机编程-寻迹传感器状态"
     export function AppProgramxunjiState() {
 
@@ -1931,13 +1931,13 @@ namespace HelloMaker_积木类 {
                     break
 
                 case 'p' + 'o' + 's':
-                    show_number = parseInt(uartData.substr(start_num + 9, uartData.length - 9))  /// mark 
-               //     cmdType = CMD_TYPE.POS;
+                     show_number = parseInt(uartData.substr(start_num + 9, uartData.length - 9))  /// mark 
+               //    cmdType = CMD_TYPE.POS;
 
                     break
 
                 case 's' + 'e' + 'n':
-                    stringReceive = uartData.substr(start_num + 6, uartData.length - 6)  /// mark							
+                      stringReceive = uartData.substr(start_num + 6, uartData.length - 6)  /// mark							
               //      cmdType = CMD_TYPE.SEN;
                     break
 
