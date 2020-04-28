@@ -1929,13 +1929,13 @@ namespace HelloMaker_积木类 {
 
                 case 'p' + 'o' + 's':
                     show_number = parseInt(uartData.substr(start_num + 9, uartData.length - 9))  /// mark 
-                    cmdType = CMD_TYPE.POS;
+               //     cmdType = CMD_TYPE.POS;
 
                     break
 
                 case 's' + 'e' + 'n':
                     stringReceive = uartData.substr(start_num + 6, uartData.length - 6)  /// mark							
-                    cmdType = CMD_TYPE.SEN;
+              //      cmdType = CMD_TYPE.SEN;
                     break
 
                 case 't' + 'e' + 'm':
