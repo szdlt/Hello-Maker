@@ -1742,12 +1742,7 @@ namespace HelloMaker_积木类 {
         SendOneServoToMcu(dlbot_speed, dlbot_id, dlbot_pos)
 
     }
-    //% blockId=AppProgramMusic block="手机编程-音调"
-    export function AppProgramMusic() {
-
-        music.playTone(Tone[tone], Beat[dlbot_beat])
-
-    }
+    
     //% blockId=AppProgramVersion block="手机编程-软件版本号"
     export function AppProgramVersion() {
         bluetooth.uartWriteString("*@HelloMakerbit_V0#")
@@ -1762,6 +1757,14 @@ namespace HelloMaker_积木类 {
     export function AppProgramShowString() {
         basic.showString(stringReceive)
     }
+	
+	//% blockId=AppProgramMusic block="手机编程-音调"
+    export function AppProgramMusic() {
+
+        music.playTone(Tone[tone], Beat[dlbot_beat])
+
+    }
+	
 	*/
     //% blockId=AppProgramxunjiState block="手机编程-寻迹传感器状态"
     export function AppProgramxunjiState() {
