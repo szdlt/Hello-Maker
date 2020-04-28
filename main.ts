@@ -1764,14 +1764,21 @@ namespace HelloMaker_积木类 {
         basic.showString(stringReceive)
     }
 	*/
-	//% blockId=AppProgramMusic block="手机编程-音调"
-    export function AppProgramMusic() {
+	//% blockId=AppProgramTone block="音调"
+    export function AppProgramTone():number {
 
-         music.playTone(Tone[tone], music.beat(Beat[dlbot_beat])) 
+		 return  Tone[tone]
+		 
+    }
+	
+	//% blockId=AppProgramBeat block="节拍"
+    export function AppProgramBeat():number {
+
+		  return music.beat(Beat[dlbot_beat])
 	  
     }
 	
-	
+
     //% blockId=AppProgramxunjiState block="手机编程-寻迹传感器状态"
     export function AppProgramxunjiState() {
 
