@@ -1930,8 +1930,8 @@ namespace HelloMaker_积木类 {
 
                 case 't' + 'o' + 'n':
 
-                    tone = parseInt(uartData.substr(start_num + 6, 2)) -1
-				//	tone = (tone -1)%7
+                    tone = parseInt(uartData.substr(start_num + 6, 2))
+					tone = (tone -1)%7
                     dlbot_beat = parseInt(uartData.substr(start_num + 9, 1))
                     cmdType = CMD_TYPE.TON
 
