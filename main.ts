@@ -736,10 +736,14 @@ namespace HelloMaker_小车类 {
         Car_SpinLeft = 6,
         //% blockId="Car_SpinRight" block="原地右旋"
         Car_SpinRight = 7,
+		//% blockId="Car_LeftSlide" block="左滑动"
+        Car_LeftSlide = 8,
+        //% blockId="Car_RightSlide" block="右滑动"
+        Car_RightSlide = 9,
         //% blockId="Car_SpeedUp" block="加速"
-        Car_SpeedUp = 8,
+        Car_SpeedUp = 10,
         //% blockId="Car_SpeedDown" block="减速"
-        Car_SpeedDown = 9
+        Car_SpeedDown = 11
     }
     export enum BalanceCarState {
         //% blockId="Balance_Run" block="前行"
@@ -1228,6 +1232,9 @@ namespace HelloMaker_小车类 {
             case CarState.Car_Stop: Car_stop(); break;
             case CarState.Car_SpinLeft: Car_spinleft(speed); break;
             case CarState.Car_SpinRight: Car_spinright(speed); break;
+			case CarState.Car_LeftSlide: Car_spinleft(speed); break;
+            case CarState.Car_RightSlide: Car_spinright(speed); break;
+			
         }
     }
 
@@ -1632,6 +1639,14 @@ namespace HelloMaker_积木类 {
                 HelloMaker_小车类.CarCtrlSpeed(HelloMaker_小车类.CarState.Car_SpinRight, dl_CarSpeed * 2.5)
                 break
 
+            case 15:
+                HelloMaker_小车类.CarCtrlSpeed(HelloMaker_小车类.CarState.Car_SpinLeft, dl_CarSpeed * 2.5)
+                break
+
+            case 16:
+                HelloMaker_小车类.CarCtrlSpeed(HelloMaker_小车类.CarState.Car_SpinRight, dl_CarSpeed * 2.5)
+                break
+
             case 17:
                 HelloMaker_小车类.CarCtrl(HelloMaker_小车类.CarState.Car_Stop)
                 break
@@ -1847,6 +1862,14 @@ namespace HelloMaker_积木类 {
                             cmdType = CMD_TYPE.ROBOT_MODE_XUNJI
                             Move_T = 14
                         }
+						else if (uartData.charAt(start_num + 13) == 'W') {
+                            Move_T = 15
+                            cmdType = CMD_TYPE.STM32_MOVE
+                        }
+                        else if (uartData.charAt(start_num + 13) == 'E') {
+                            Move_T = 16
+                            cmdType = CMD_TYPE.STM32_MOVE
+                        }
                         else if (uartData.charAt(start_num + 13) == '0') {
                             Move_T = 17
                             cmdType = CMD_TYPE.STM32_MOVE
@@ -1854,8 +1877,7 @@ namespace HelloMaker_积木类 {
                         else {
                             Move_T = 17
                         }
-                        SendMoveTypeToMcu(Move_T)
-
+                        
                     }
                     else if (uartData.charAt(start_num + 5) == 'o') {
                         let Angle = 0
