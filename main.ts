@@ -1648,7 +1648,7 @@ namespace HelloMaker_积木类 {
     //% blockId=ServoOne block="蓝牙-单舵机运动"
     export function ServoOne() {
         let Angle = 0
-        SendOneServoToMcu(100, Stm32_ID, Stm32_POS)
+    //    SendOneServoToMcu(100, Stm32_ID, Stm32_POS)
         Angle = Math.map(Stm32_POS, 0, 1000, 0, 180)
         HelloMaker_小车类.Servo_Car(Stm32_ID, Angle, 0)
 
