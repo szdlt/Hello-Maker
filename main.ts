@@ -736,7 +736,7 @@ namespace HelloMaker_小车类 {
         Car_SpinLeft = 6,
         //% blockId="Car_SpinRight" block="原地右旋"
         Car_SpinRight = 7,
-		//% blockId="Car_LeftSlide" block="左滑动"
+        //% blockId="Car_LeftSlide" block="左滑动"
         Car_LeftSlide = 8,
         //% blockId="Car_RightSlide" block="右滑动"
         Car_RightSlide = 9,
@@ -827,8 +827,8 @@ namespace HelloMaker_小车类 {
         */
         setPwm(12, 0, speed);
         setPwm(13, 0, 0);
-        setPwm(15, 0, speed);
-        setPwm(14, 0, 0);
+        setPwm(14, 0, speed);
+        setPwm(15, 0, 0);
 
         //pins.digitalWritePin(DigitalPin.P16, 1);
         // pins.analogWritePin(AnalogPin.P1, 1023-speed); //速度控制
@@ -852,8 +852,8 @@ namespace HelloMaker_小车类 {
         */
         setPwm(12, 0, 0);
         setPwm(13, 0, speed);
-        setPwm(15, 0, 0);
-        setPwm(14, 0, speed);
+        setPwm(14, 0, 0);
+        setPwm(15, 0, speed);
         //pins.digitalWritePin(DigitalPin.P16, 0);
         //pins.analogWritePin(AnalogPin.P1, speed); //速度控制
         //pins.analogWritePin(AnalogPin.P0, 1023 - speed);//速度控制
@@ -875,8 +875,8 @@ namespace HelloMaker_小车类 {
             */
         setPwm(12, 0, 0);
         setPwm(13, 0, 0);
-        setPwm(15, 0, speed);
-        setPwm(14, 0, 0);
+        setPwm(14, 0, speed);
+        setPwm(15, 0, 0);
         //pins.analogWritePin(AnalogPin.P0, speed);
         //pins.digitalWritePin(DigitalPin.P8, 0);
         //pins.digitalWritePin(DigitalPin.P16, 0);
@@ -900,8 +900,8 @@ namespace HelloMaker_小车类 {
         setPwm(12, 0, speed);
         setPwm(13, 0, 0);
 
-        setPwm(15, 0, 0);
         setPwm(14, 0, 0);
+        setPwm(15, 0, 0);
         //pins.digitalWritePin(DigitalPin.P0, 0);
         //pins.digitalWritePin(DigitalPin.P8, 0);
         //pins.digitalWritePin(DigitalPin.P16, 1);
@@ -916,8 +916,8 @@ namespace HelloMaker_小车类 {
         */
         setPwm(12, 0, 0);
         setPwm(13, 0, 0);
-        setPwm(15, 0, 0);
         setPwm(14, 0, 0);
+        setPwm(15, 0, 0);
         //pins.digitalWritePin(DigitalPin.P0, 0);
         //pins.digitalWritePin(DigitalPin.P8, 0);
         //pins.digitalWritePin(DigitalPin.P16, 0);
@@ -939,8 +939,8 @@ namespace HelloMaker_小车类 {
         */
         setPwm(12, 0, 0);
         setPwm(13, 0, speed);
-        setPwm(15, 0, speed);
-        setPwm(14, 0, 0);
+        setPwm(14, 0, speed);
+        setPwm(15, 0, 0);
         //pins.analogWritePin(AnalogPin.P0, speed);
         //pins.digitalWritePin(DigitalPin.P8, 0);
         //pins.digitalWritePin(DigitalPin.P16, 0);
@@ -962,8 +962,8 @@ namespace HelloMaker_小车类 {
         */
         setPwm(12, 0, speed);
         setPwm(13, 0, 0);
-        setPwm(15, 0, 0);
-        setPwm(14, 0, speed);
+        setPwm(14, 0, 0);
+        setPwm(15, 0, speed);
         //pins.analogWritePin(AnalogPin.P0, 1023-speed);
         //pins.digitalWritePin(DigitalPin.P8, 1);
         //pins.digitalWritePin(DigitalPin.P16, 1);
@@ -1232,9 +1232,9 @@ namespace HelloMaker_小车类 {
             case CarState.Car_Stop: Car_stop(); break;
             case CarState.Car_SpinLeft: Car_spinleft(speed); break;
             case CarState.Car_SpinRight: Car_spinright(speed); break;
-			case CarState.Car_LeftSlide: Car_spinleft(speed); break;
+            case CarState.Car_LeftSlide: Car_spinleft(speed); break;
             case CarState.Car_RightSlide: Car_spinright(speed); break;
-			
+
         }
     }
 
@@ -1429,15 +1429,15 @@ namespace HelloMaker_积木类 {
 				2093, 2349, 2637, 2794, 3136, 3520, 3951,
                 4186, 4699]
     */
-	let Tone = [1047, 1175, 1319, 1397, 1568, 1760, 1976]
-	
-	
-   // let Beat = [16, 16, 8, 4, 2, 1, 32, 64]
-   
- //  let Beat = [2, 2, 4, 8, 1, 32, 64]
-   let Beat = [8, 8, 4, 2, 1, 32, 64]
-   
-   
+    let Tone = [1047, 1175, 1319, 1397, 1568, 1760, 1976]
+
+
+    // let Beat = [16, 16, 8, 4, 2, 1, 32, 64]
+
+    //  let Beat = [2, 2, 4, 8, 1, 32, 64]
+    let Beat = [8, 8, 4, 2, 1, 32, 64]
+
+
 
     export enum CMD_TYPE {
         //% block="手机编程-直行"
@@ -1657,13 +1657,13 @@ namespace HelloMaker_积木类 {
 
         }
 
-      //  SendMoveTypeToMcu(Move_T)
+        //  SendMoveTypeToMcu(Move_T)
 
     }
     //% blockId=ServoOne block="蓝牙-单舵机运动"
     export function ServoOne() {
         let Angle = 0
-    //    SendOneServoToMcu(100, Stm32_ID, Stm32_POS)
+        //    SendOneServoToMcu(100, Stm32_ID, Stm32_POS)
         Angle = Math.map(Stm32_POS, 0, 1000, 0, 180)
         HelloMaker_小车类.Servo_Car(Stm32_ID, Angle, 0)
 
@@ -1754,7 +1754,7 @@ namespace HelloMaker_积木类 {
         HelloMaker_小车类.Servo_Car(dlbot_id, dlbot_pos, dlbot_speed)
 
     }
-	
+
     //% blockId=AppProgramBusServo block="手机编程-总线舵机运动"
     export function AppProgramBusServo() {
 
@@ -1762,13 +1762,13 @@ namespace HelloMaker_积木类 {
         SendOneServoToMcu(dlbot_speed, dlbot_id, dlbot_pos)
 
     }
-    
+
     //% blockId=AppProgramVersion block="手机编程-软件版本号"
     export function AppProgramVersion() {
         bluetooth.uartWriteString("*@HelloMakerbit_V0#")
 
     }
-	
+
     //% blockId=AppProgramShowNumber block="手机编程-数字显示"
     export function AppProgramShowNumber() {
         basic.showNumber(show_number)
@@ -1777,21 +1777,21 @@ namespace HelloMaker_积木类 {
     export function AppProgramShowString() {
         basic.showString(stringReceive)
     }
-	
-	//% blockId=AppProgramTone block="音调"
-    export function AppProgramTone():number {
 
-		 return  Tone[tone]
-		 
-    }
-	
-	//% blockId=AppProgramBeat block="节拍"
-    export function AppProgramBeat():number {
+    //% blockId=AppProgramTone block="音调"
+    export function AppProgramTone(): number {
 
-		  return music.beat(Beat[dlbot_beat])
-	  
+        return Tone[tone]
+
     }
-	
+
+    //% blockId=AppProgramBeat block="节拍"
+    export function AppProgramBeat(): number {
+
+        return music.beat(Beat[dlbot_beat])
+
+    }
+
 
     //% blockId=AppProgramxunjiState block="手机编程-寻迹传感器状态"
     export function AppProgramxunjiState() {
@@ -1833,9 +1833,9 @@ namespace HelloMaker_积木类 {
         let start_num = uartData.indexOf("*@")
         if (start_num != -1) {
 
-            let sum3 = uartData.charAt(start_num + 2) + uartData.charAt(start_num + 3) + uartData.charAt(start_num + 4);
+            let sum3 = uartData.substr(start_num + 2, 3)
             switch (sum3) {
-                case 'S' + 'e' + 'r':
+                case "Ser":
 
                     if (uartData.charAt(start_num + 5) == 'c') {
                         if (uartData.charAt(start_num + 13) == 'S') {
@@ -1862,7 +1862,7 @@ namespace HelloMaker_积木类 {
                             cmdType = CMD_TYPE.ROBOT_MODE_XUNJI
                             Move_T = 14
                         }
-						else if (uartData.charAt(start_num + 13) == 'W') {
+                        else if (uartData.charAt(start_num + 13) == 'W') {
                             Move_T = 15
                             cmdType = CMD_TYPE.STM32_MOVE
                         }
@@ -1877,7 +1877,7 @@ namespace HelloMaker_积木类 {
                         else {
                             Move_T = 17
                         }
-                        
+
                     }
                     else if (uartData.charAt(start_num + 5) == 'o') {
                         let Angle = 0
@@ -1892,19 +1892,19 @@ namespace HelloMaker_积木类 {
 
                     break;
 
-                case 'm' + 's' + 't':
+                case "mst":
                     move = parseInt(uartData.substr(start_num + 6, 1))
                     speed = parseInt(uartData.substr(start_num + 8, 3))
                     time = parseInt(uartData.substr(start_num + 12, 2))
                     cmdType = CMD_TYPE.MST;
                     break
 
-                case 's' + 'p' + 'e':
+                case "spe":
                     dl_CarSpeed = parseInt(uartData.substr(start_num + 8, 3))
                     cmdType = CMD_TYPE.ROBOT_SPEED_ADJUST
                     break
 
-                case 'd' + 's' + 't':
+                case "dst":
                     direction = parseInt(uartData.substr(start_num + 6, 1))
                     speed = parseInt(uartData.substr(start_num + 8, 3))
                     time = parseInt(uartData.substr(start_num + 12, 2))
@@ -1913,7 +1913,7 @@ namespace HelloMaker_积木类 {
                     break
 
 
-                case 'l' + 'i' + 'g':
+                case "lig":
                     rgb_id = parseInt(uartData.substr(start_num + 6, 1))
                     rgb_color = parseInt(uartData.substr(start_num + 8, 1))
                     rgb_bright = parseInt(uartData.substr(start_num + 10, 3))
@@ -1922,7 +1922,7 @@ namespace HelloMaker_积木类 {
 
                     break
 
-                case 'c' + 'o' + 'l':
+                case "col":
                     {
                         color_id = parseInt(uartData.substr(start_num + 6, 1))
                         cmdType = CMD_TYPE.COL;
@@ -1930,7 +1930,7 @@ namespace HelloMaker_积木类 {
                     }
 
                     break
-                case 's' + 'e' + 'r':
+                case "ser":
 
 
                     dlbot_pos = parseInt(uartData.substr(start_num + 6, 3))
@@ -1948,39 +1948,39 @@ namespace HelloMaker_积木类 {
                     }
                     break
 
-                case 't' + 'o' + 'n':
+                case "ton":
 
                     tone = parseInt(uartData.substr(start_num + 6, 2))
-					tone = (tone -1)%7
+                    tone = (tone - 1) % 7
                     dlbot_beat = parseInt(uartData.substr(start_num + 9, 1))
                     cmdType = CMD_TYPE.TON
 
                     break
 
-                case 'v' + 'e' + 'r':
+                case "ver":
 
                     Math.map(0, 0, 1023, 0, 4)
                     cmdType = CMD_TYPE.VER;
 
                     break
 
-                case 'p' + 'o' + 's':
-                     show_number = parseInt(uartData.substr(start_num + 9, uartData.length - 9))  /// mark 
-                     cmdType = CMD_TYPE.POS;
+                case "pos":
+                    show_number = parseInt(uartData.substr(start_num + 9, uartData.length - 9))  /// mark 
+                    cmdType = CMD_TYPE.POS;
 
                     break
 
-                case 's' + 'e' + 'n':
-                     stringReceive = uartData.substr(start_num + 6, uartData.length - 6)  /// mark							
-                      cmdType = CMD_TYPE.SEN;
+                case "sen":
+                    stringReceive = uartData.substr(start_num + 6, uartData.length - 6)  /// mark							
+                    cmdType = CMD_TYPE.SEN;
                     break
 
-                case 't' + 'e' + 'm':
+                case "tem":
 
                     cmdType = CMD_TYPE.TEM
                     break
 
-                case 's' + 't' + 'a':
+                case "sta":
 
                     cmdType = CMD_TYPE.STA;
                     break
@@ -1991,7 +1991,7 @@ namespace HelloMaker_积木类 {
             }
 
         }
-      
+
     }
 
 
