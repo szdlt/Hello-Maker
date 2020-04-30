@@ -1335,7 +1335,7 @@ namespace HelloMaker_小车类 {
         return CarDirState
     }
 
-    //% blockId=DirectionState block="机器人运动状态：%index"
+    //% blockId=DirectionStateParam block="机器人运动状态：%index"
     export function DirectionStateParam(index:CarState): boolean {
 
         return (CarDirState ==  index)
