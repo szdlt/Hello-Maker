@@ -50,6 +50,7 @@ namespace HelloMaker_显示类 {
 
     //% blockId="setBrightness" block="set brightness %brightness"
     //% brightness.min=0 brightness.max=255
+	//% brightness.defl=255
     //% weight=92
     export function setBrightness(brightness: number): void {
         lhRGBLight.setBrightness(brightness);
@@ -70,6 +71,7 @@ namespace HelloMaker_显示类 {
 
 
     //% weight=90 blockId=setPixelRGBArgs block="Set|%lightoffset|color to %rgb"
+	//% rgb.defl=0x0000FF
     export function setPixelRGBArgs(lightoffset: Lights, rgb: number) {
 
         if (lightoffset == 0) {
@@ -659,13 +661,13 @@ namespace HelloMaker_小车类 {
    
     let arr = [0, 0, 0, 0, 0]
     export enum enPos {
-        //% blockId="Sensor1" block="传感器1"
+        //% blockId="Sensor1" block="1"
         Sensor1 = 0,
-        //% blockId="Sensor2" block="传感器2"
+        //% blockId="Sensor2" block="2"
         Sensor2 = 1,
-        //% blockId="Sensor3" block="传感器3"
+        //% blockId="Sensor3" block="3"
         Sensor3 = 2,
-        //% blockId="Sensor4" block="传感器4"
+        //% blockId="Sensor4" block="4"
         Sensor4 = 3
     }
     export enum enLineState {
@@ -1028,6 +1030,7 @@ namespace HelloMaker_小车类 {
     //% speed.min=1 speed.max=10
     //% color="#006400"
     //% num.min=1 num.max=6 value.min=0 value.max=180
+	//% value.defl=90
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
     export function Servo_Car(num: enServo, value: number, speed: number): void {
         // 50hz: 20,000 us
@@ -1223,6 +1226,7 @@ namespace HelloMaker_小车类 {
     //% weight=92
     //% blockGap=10
     //% speed.min=0 speed.max=255
+	//% speed.defl=200
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrlSpeed(index: CarState, speed: number): void {
@@ -1345,6 +1349,7 @@ namespace HelloMaker_小车类 {
     //% weight=93
     //% blockGap=10
     //% speed.min=0 speed.max=255
+	//% speed.defl=200
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function MotorRun(index0: MotorNum, index1: MotorDir, speed: number) {
