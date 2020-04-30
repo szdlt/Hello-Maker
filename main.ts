@@ -1628,7 +1628,7 @@ namespace HelloMaker_积木类 {
 
     }
 
-    //% blockId=RobotMove block="蓝牙控制小车运动"
+    //% blockId=RobotMove block="蓝牙控制机器人运动"
     export function RobotMove() {
 
         switch (Move_T) {
@@ -1977,7 +1977,6 @@ namespace HelloMaker_积木类 {
 
                 case "ver":
 
-                    Math.map(0, 0, 1023, 0, 4)
                     cmdType = CMD_TYPE.VER;
 
                     break
