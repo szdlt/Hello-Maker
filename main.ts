@@ -26,6 +26,7 @@ namespace HelloMaker_显示类 {
     }
 
     //% blockId="initRGBLight" block="初始化 %rgb_id| %dataPin"
+	//% dataPin.defl=DigitalPin.P16
     //% weight=94
     export function initRGBLight(rgb_id: RGB, dataPin: DigitalPin) {
 
@@ -447,6 +448,7 @@ namespace HelloMaker_传感器类 {
 
     //% block="温湿度传感器：%dataPin"
     //% pullUp.defl=true
+	//% dataPin.defl=DigitalPin.P6
     //% blockExternalInputs=true
     export function queryData(dataPin: DigitalPin) {
 
@@ -525,6 +527,7 @@ namespace HelloMaker_传感器类 {
 
 
     //% block="声音传感器：%dataPin|%value|声音"
+	//% dataPin.defl=DigitalPin.P7
     export function Voice_Sensor(dataPin: DigitalPin, value: enVoice): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -537,7 +540,7 @@ namespace HelloMaker_传感器类 {
 
     }
     //% block="倾斜传感器：%dataPin|%value|倾斜"
-
+    //% dataPin.defl=DigitalPin.P9
     export function Incline_Sensor(dataPin: DigitalPin, value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -551,6 +554,7 @@ namespace HelloMaker_传感器类 {
     }
 
     //% block="烟雾传感器：%dataPin|%value|烟雾"
+	//% dataPin.defl=DigitalPin.P13
     export function Smog_Sensor(dataPin: DigitalPin, value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -564,6 +568,7 @@ namespace HelloMaker_传感器类 {
     }
 
     //% block="触摸传感器：%dataPin|%value|触摸"
+	//% dataPin.defl=DigitalPin.P13
     export function Touch_Sensor(dataPin: DigitalPin, value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -576,7 +581,7 @@ namespace HelloMaker_传感器类 {
 
     }
     //% block="烟雾传感器：%dataPin|%value|光照"
-
+    //% dataPin.defl=DigitalPin.P8
     export function Photosensitive_Sensor(dataPin: DigitalPin, value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -592,6 +597,7 @@ namespace HelloMaker_传感器类 {
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
+	//% dataPin.defl=AnalogPin.P10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Potentiometer(dataPin: AnalogPin): number {
 
@@ -600,6 +606,7 @@ namespace HelloMaker_传感器类 {
     }
 
     //% block="按键模块：%dataPin|%value|按下"
+	//% dataPin.defl=DigitalPin.P8
     export function KeyDetect(dataPin: DigitalPin, value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -613,7 +620,7 @@ namespace HelloMaker_传感器类 {
     }
 
     //% block="火焰传感器：%dataPin|%value|火焰"
-
+    //% dataPin.defl=DigitalPin.P14
     export function Flame_Sensor(dataPin: DigitalPin, value: enIR): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
@@ -1092,6 +1099,7 @@ namespace HelloMaker_小车类 {
     //% weight=95
     //% blockGap=10
     //% color="#006400"
+	//% dataPin.defl=DigitalPin.P2
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function Avoid_Sensor(num: NumAvoidSensor, dataPin: DigitalPin, value: enAvoidState): boolean {
         let temp: boolean = false;
