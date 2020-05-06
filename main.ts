@@ -1896,7 +1896,7 @@ namespace HelloMaker_积木类 {
                         }
                         else if (uartData.charAt(start_num + 13) == 'E') {
                             Move_T = 16
-							CarDirState = HelloMaker_小车类.CarState.Car_SpinRight
+							CarDirState = HelloMaker_小车类.CarState.Car_RightSlide
                             cmdType = CMD_TYPE.STM32_MOVE
                         }
                         else if (uartData.charAt(start_num + 13) == '0') {
@@ -2024,6 +2024,4 @@ namespace HelloMaker_积木类 {
       
     }
 
-
 }
-
