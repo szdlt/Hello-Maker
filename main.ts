@@ -1439,6 +1439,8 @@ namespace HelloMaker_积木类 {
     let Stm32_ID = -1
     let Stm32_GROUP = -1
     let Robot_Mode = -1
+	let arm = -1
+	let claw = -1
     export let Move_T = -1
     let stringReceive = ""
     let dl_CarSpeed = 80
@@ -1497,7 +1499,9 @@ namespace HelloMaker_积木类 {
         //% block="机器人速度调整"
         ROBOT_SPEED_ADJUST,
         //% block="手机编程-总线舵机"
-        GP_BUSSERVO
+        GP_BUSSERVO,
+		//% block="控制车载机械臂"
+		DCARM
 
     }
     let CMD_MULT_SERVO_MOVE = 3
@@ -1695,6 +1699,28 @@ namespace HelloMaker_积木类 {
         SendServoGroupToMcu(Stm32_GROUP, 1)
 
     }
+	//% blockId=ArmClaw block="蓝牙-车载机械臂"
+    export function ArmClaw() {
+        let Angle = 0
+        Angle = Math.map(claw, 0, 1000, 0, 180)
+        HelloMaker_小车类.Servo_Car(1, Angle, 0)
+		if(arm > 700)
+		{
+			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.clockwise,dl_CarSpeed * 2.5)
+			
+		}
+		else if(arm > 700)
+		{
+			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.anticlockwise,dl_CarSpeed * 2.5)
+			
+		}
+        else{
+			
+			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.anticlockwise,0)
+		}
+    }
+	
+	
     //% blockId=AppProgramMove block="手机编程-机器人直行"
     export function AppProgramMove() {
         if (move == 1) {
@@ -1927,7 +1953,14 @@ namespace HelloMaker_积木类 {
                         Stm32_GROUP = parseInt(uartData.substr(start_num + 11, 3))
                         cmdType = CMD_TYPE.SERVO_GROUP
                     }
-
+                    else if (uartData.charAt(5) == '2') {
+                        
+																	
+						claw = parseInt(uartData.substr(start_num + 7, 4))
+						arm =  parseInt(uartData.substr(start_num + 12, 4))
+						cmdType = CMD_TYPE.DCARM;
+							
+                    }
                     break;
 
                 case "mst":
