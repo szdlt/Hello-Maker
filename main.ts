@@ -1883,7 +1883,7 @@ namespace HelloMaker_积木类 {
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
 
-    export function BuildingBlocks(uartData: string) {
+    export function BuildingBlocks(uartData: string) :number{
 
         let start_num = uartData.indexOf("*@")
         if (start_num != -1) {
@@ -2059,11 +2059,12 @@ namespace HelloMaker_积木类 {
                     cmdType = -1
                     break
             }
-
+                 return  cmdType
         }
-
+                 return -1
     }
 
 
 }
+
 
