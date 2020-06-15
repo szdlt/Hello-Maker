@@ -1888,9 +1888,10 @@ namespace HelloMaker_积木类 {
         let start_num = uartData.indexOf("*@")
         if (start_num != -1) {
 
-            let sum3 = uartData.substr(start_num + 2, 3)
+         // let sum3 = uartData.substr(start_num + 2, 3)
+			let sum3 = uartData.charAt(start_num+2)+uartData.charAt(start_num+3)+uartData.charAt(start_num+4);
             switch (sum3) {
-                case "Ser":
+                case 'S'+'e'+'r':  //  "Ser":
 
                     if (uartData.charAt(start_num + 5) == 'c') {
                         if (uartData.charAt(start_num + 13) == 'S') {
@@ -1954,8 +1955,7 @@ namespace HelloMaker_积木类 {
                         cmdType = CMD_TYPE.SERVO_GROUP
                     }
                     else if (uartData.charAt(5) == '2') {
-                        
-																	
+                        																
 						claw = parseInt(uartData.substr(start_num + 7, 4))
 						arm =  parseInt(uartData.substr(start_num + 12, 4))
 						cmdType = CMD_TYPE.DCARM;
@@ -1963,28 +1963,27 @@ namespace HelloMaker_积木类 {
                     }
                     break;
 
-                case "mst":
+                case 'm'+'s'+'t': //"mst":
                     move = parseInt(uartData.substr(start_num + 6, 1))
                     speed = parseInt(uartData.substr(start_num + 8, 3))
                     time = parseInt(uartData.substr(start_num + 12, 2))
                     cmdType = CMD_TYPE.MST;
                     break
 
-                case "spe":
+                case 's'+'p'+'e': //"spe":
                     dl_CarSpeed = parseInt(uartData.substr(start_num + 8, 3))
                     cmdType = CMD_TYPE.ROBOT_SPEED_ADJUST
                     break
 
-                case "dst":
+                case 'd'+'s'+'t': //"dst":
                     direction = parseInt(uartData.substr(start_num + 6, 1))
                     speed = parseInt(uartData.substr(start_num + 8, 3))
                     time = parseInt(uartData.substr(start_num + 12, 2))
-
                     cmdType = CMD_TYPE.DST;
                     break
 
 
-                case "lig":
+                case 'l'+'i'+'g': //"lig":
                     rgb_id = parseInt(uartData.substr(start_num + 6, 1))
                     rgb_color = parseInt(uartData.substr(start_num + 8, 1))
                     rgb_bright = parseInt(uartData.substr(start_num + 10, 3))
@@ -1993,7 +1992,7 @@ namespace HelloMaker_积木类 {
 
                     break
 
-                case "col":
+                case 'c'+'o'+'l': //"col":
                     {
                         color_id = parseInt(uartData.substr(start_num + 6, 1))
                         cmdType = CMD_TYPE.COL;
@@ -2001,8 +2000,7 @@ namespace HelloMaker_积木类 {
                     }
 
                     break
-                case "ser":
-
+                case 's'+'e'+'r': //"ser":
 
                     dlbot_pos = parseInt(uartData.substr(start_num + 6, 3))
                     dlbot_id = parseInt(uartData.substr(start_num + 10, 1))
@@ -2019,7 +2017,7 @@ namespace HelloMaker_积木类 {
                     }
                     break
 
-                case "ton":
+                case 't'+'o'+'n': //"ton":
 
                     tone = parseInt(uartData.substr(start_num + 6, 2))
                     tone = (tone - 1) % 7
@@ -2027,34 +2025,34 @@ namespace HelloMaker_积木类 {
                     cmdType = CMD_TYPE.TON
 
                     break
-
-                case "ver":
+                /*
+                case 'v'+'e'+'r': //"ver":
 
                     cmdType = CMD_TYPE.VER;
 
                     break
 
-                case "pos":
+                case 'p'+'o'+'s': //"pos":
                     show_number = parseInt(uartData.substr(start_num + 9, uartData.length - 9))  /// mark 
                     cmdType = CMD_TYPE.POS;
 
                     break
 
-                case "sen":
+                case 's'+'e'+'n': //"sen":
                     stringReceive = uartData.substr(start_num + 6, uartData.length - 6)  /// mark							
                     cmdType = CMD_TYPE.SEN;
                     break
 
-                case "tem":
+                case 't'+'e'+'m': //"tem":
 
                     cmdType = CMD_TYPE.TEM
                     break
 
-                case "sta":
+                case 's'+'t'+'a': //"sta":
 
                     cmdType = CMD_TYPE.STA;
                     break
-
+                */
                 default:
                     cmdType = -1
                     break
@@ -2066,5 +2064,4 @@ namespace HelloMaker_积木类 {
 
 
 }
-
 
