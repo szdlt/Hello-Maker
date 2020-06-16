@@ -1704,6 +1704,8 @@ namespace HelloMaker_积木类 {
         let Angle = 0
         Angle = Math.map(claw, 0, 1000, 0, 180)
         HelloMaker_小车类.Servo_Car(1, Angle, 0)
+		
+		/*
 		if(arm > 700)
 		{
 			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.clockwise,dl_CarSpeed * 2.5)
@@ -1718,6 +1720,7 @@ namespace HelloMaker_积木类 {
 			
 			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.anticlockwise,0)
 		}
+		*/
     }
 	
 	
@@ -1958,10 +1961,10 @@ namespace HelloMaker_积木类 {
                         																
 						claw = parseInt(uartData.substr(start_num + 7, 4))
 						arm =  parseInt(uartData.substr(start_num + 12, 4))
-						cmdType = CMD_TYPE.DCARM;
+						cmdType = CMD_TYPE.DCARM
 							
                     }
-                    break;
+                    break
                 
                 case 'm'+'s'+'t': //"mst":
                     move = parseInt(uartData.substr(start_num + 6, 1))
