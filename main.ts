@@ -1962,7 +1962,7 @@ namespace HelloMaker_积木类 {
 							
                     }
                     break;
-                /*
+                
                 case 'm'+'s'+'t': //"mst":
                     move = parseInt(uartData.substr(start_num + 6, 1))
                     speed = parseInt(uartData.substr(start_num + 8, 3))
@@ -2025,7 +2025,7 @@ namespace HelloMaker_积木类 {
                     cmdType = CMD_TYPE.TON
 
                     break
-                
+                /*
                 case 'v'+'e'+'r': //"ver":
 
                     cmdType = CMD_TYPE.VER;
