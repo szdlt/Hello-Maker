@@ -1709,7 +1709,7 @@ namespace HelloMaker_积木类 {
 			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.clockwise,dl_CarSpeed * 2.5)
 			
 		}
-		else if(arm > 700)
+		else if(arm < 300)
 		{
 			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.anticlockwise,dl_CarSpeed * 2.5)
 			
@@ -1945,7 +1945,7 @@ namespace HelloMaker_积木类 {
 
                     }
                     else if (uartData.charAt(start_num + 5) == 'o') {
-                        let Angle = 0
+                        
                         Stm32_POS = parseInt(uartData.substr(start_num + 9, 4))
                         Stm32_ID = parseInt(uartData.substr(start_num + 14, 1))
                         cmdType = CMD_TYPE.SERVO_ONE
