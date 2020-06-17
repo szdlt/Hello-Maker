@@ -1705,7 +1705,7 @@ namespace HelloMaker_积木类 {
         Angle = Math.map(claw, 0, 1000, 0, 180)
         HelloMaker_小车类.Servo_Car(1, Angle, 0)
 		
-		/*
+		
 		if(arm > 700)
 		{
 			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.clockwise,dl_CarSpeed * 2.5)
@@ -1720,10 +1720,15 @@ namespace HelloMaker_积木类 {
 			
 			HelloMaker_小车类.MotorRun(HelloMaker_小车类.MotorNum.Motor2,HelloMaker_小车类.MotorDir.anticlockwise,0)
 		}
-		*/
+		
     }
 	
-	
+	//% blockId=Current_cmd block="蓝牙命令"
+    export function Current_cmd() :number{
+		
+		return cmdType
+		
+	}
     //% blockId=AppProgramMove block="手机编程-机器人直行"
     export function AppProgramMove() {
         if (move == 1) {
@@ -1970,7 +1975,7 @@ namespace HelloMaker_积木类 {
                     move = parseInt(uartData.substr(start_num + 6, 1))
                     speed = parseInt(uartData.substr(start_num + 8, 3))
                     time = parseInt(uartData.substr(start_num + 12, 2))
-                    cmdType = CMD_TYPE.MST;
+                    cmdType = CMD_TYPE.MST
                     break
 
                 case "spe":  //'s'+'p'+'e': //"spe":
@@ -1982,7 +1987,7 @@ namespace HelloMaker_积木类 {
                     direction = parseInt(uartData.substr(start_num + 6, 1))
                     speed = parseInt(uartData.substr(start_num + 8, 3))
                     time = parseInt(uartData.substr(start_num + 12, 2))
-                    cmdType = CMD_TYPE.DST;
+                    cmdType = CMD_TYPE.DST
                     break
 
 
@@ -1991,14 +1996,14 @@ namespace HelloMaker_积木类 {
                     rgb_color = parseInt(uartData.substr(start_num + 8, 1))
                     rgb_bright = parseInt(uartData.substr(start_num + 10, 3))
 
-                    cmdType = CMD_TYPE.LIG;
+                    cmdType = CMD_TYPE.LIG
 
                     break
 
                 case "col":  //'c'+'o'+'l': //"col":
                     {
                         color_id = parseInt(uartData.substr(start_num + 6, 1))
-                        cmdType = CMD_TYPE.COL;
+                        cmdType = CMD_TYPE.COL
 
                     }
 
@@ -2015,7 +2020,7 @@ namespace HelloMaker_积木类 {
                     }
                     else if (uartData.charAt(start_num + 4) == 's') {
                         dlbot_speed = Math.map(10 - dlbot_speed, 0, 10, 100, 1000);
-                        cmdType = CMD_TYPE.GP_BUSSERVO;
+                        cmdType = CMD_TYPE.GP_BUSSERVO
 
                     }
                     break
@@ -2043,7 +2048,7 @@ namespace HelloMaker_积木类 {
 
                 case 's'+'e'+'n': //"sen":
                     stringReceive = uartData.substr(start_num + 6, uartData.length - 6)  /// mark							
-                    cmdType = CMD_TYPE.SEN;
+                    cmdType = CMD_TYPE.SEN
                     break
 
                 case 't'+'e'+'m': //"tem":
@@ -2053,7 +2058,7 @@ namespace HelloMaker_积木类 {
 
                 case 's'+'t'+'a': //"sta":
 
-                    cmdType = CMD_TYPE.STA;
+                    cmdType = CMD_TYPE.STA
                     break
                 */
                 default:
