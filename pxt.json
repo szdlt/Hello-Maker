@@ -9,6 +9,7 @@
     "files": [
         "README.md",
         "main.ts",
+        "DlbitRGBLight.ts",
         "sendbuffer.asm",
         "_locales/zh/HelloMaker-strings.json"
     ],
