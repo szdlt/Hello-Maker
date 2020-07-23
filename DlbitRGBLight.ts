@@ -68,7 +68,7 @@ namespace DlbitRGBLight {
         _length: number; // number of LEDs
         _mode: DlbitRGBPixelMode;
 
-        setBrightness(brightness: number): void {
+        function setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
         }
 
