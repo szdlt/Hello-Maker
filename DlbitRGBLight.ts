@@ -82,7 +82,8 @@ namespace DlbitRGBLight {
             this.setPixelRGB(pixeloffset, rgb, flag);
         }
 
-        private setPixelRGB(pixeloffset: number, rgb: DlbitRGBColors, flag: boolean): void {
+    //    private setPixelRGB(pixeloffset: number, rgb: DlbitRGBColors, flag: boolean): void {
+          setPixelRGB(pixeloffset: number, rgb: DlbitRGBColors, flag: boolean): void {
             if (pixeloffset < 0
                 || pixeloffset >= this._length)
                 return;
