@@ -1501,8 +1501,9 @@ namespace HelloMaker_积木类 {
         //% block="手机编程-总线舵机"
         GP_BUSSERVO,
 		//% block="控制车载机械臂"
-		DCARM
-
+		DCARM,
+        //% block="无效指令"
+		ERROR
     }
     let CMD_MULT_SERVO_MOVE = 3
     let CMD_FULL_ACTION_RUN = 6
@@ -1963,9 +1964,9 @@ namespace HelloMaker_积木类 {
                         cmdType = CMD_TYPE.SERVO_GROUP
                     }
                     else if (uartData.charAt(6) == '-')  {
-			claw = parseInt(uartData.substr(start_num + 7, 4))
-			arm =  parseInt(uartData.substr(start_num + 12, 4))
-			cmdType = CMD_TYPE.DCARM				
+								claw = parseInt(uartData.substr(start_num + 7, 4))
+								arm =  parseInt(uartData.substr(start_num + 12, 4))
+								cmdType = CMD_TYPE.DCARM				
                     }
                     break
                 
