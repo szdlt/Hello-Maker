@@ -1962,13 +1962,10 @@ namespace HelloMaker_积木类 {
                         Stm32_GROUP = parseInt(uartData.substr(start_num + 11, 3))
                         cmdType = CMD_TYPE.SERVO_GROUP
                     }
-                    else {
-				            //    if (uartData.charAt(5) == '2') 
-                        																
-							claw = parseInt(uartData.substr(start_num + 7, 4))
-							arm =  parseInt(uartData.substr(start_num + 12, 4))
-							cmdType = CMD_TYPE.DCARM
-							
+                    else if (uartData.charAt(5) == '2')  {
+			claw = parseInt(uartData.substr(start_num + 7, 4))
+			arm =  parseInt(uartData.substr(start_num + 12, 4))
+			cmdType = CMD_TYPE.DCARM				
                     }
                     break
                 
