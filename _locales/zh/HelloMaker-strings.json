@@ -74,7 +74,6 @@
   
   "HelloMaker_小车类.ultrasonic_car|block": "超声波快速测距(cm)",
   "HelloMaker_小车类.PreciseUltrasonic|block": "超声波精准测距(cm)",
-  "HelloMaker_小车类.PreciseUltrasonic|block": "超声波精准测距(cm)",
   "HelloMaker_小车类.Servo_Car|block": "小车舵机|编号 %num|角度 %value|速度 %speed",
   
   "HelloMaker_小车类.Avoid_Sensor|block": "红外避障传感器| %num| %dataPin|%value 障碍物",
