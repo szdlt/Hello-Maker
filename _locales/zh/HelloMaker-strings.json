@@ -132,8 +132,5 @@
   "HelloMaker_积木类.AppProgramTemper|block": "手机编程-温度传感器数据",
   "HelloMaker_积木类.APPCmd|block": "APP命令类型为 %type",
   "HelloMaker_积木类.APPSpeed|block": "蓝牙—机器人运动速度",
-  "HelloMaker_积木类.BuildingBlocks|block": "深联积木%uartData",
-  
-  
-  
+  "HelloMaker_积木类.BuildingBlocks|block": "深联积木%uartData"
 }
