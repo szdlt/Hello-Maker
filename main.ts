@@ -1,13 +1,13 @@
 enum Colors {
-    //% blockId="Red" block="红色"
+    //% blockId="Red" block="Red"
     Red = 0x01,
-    //% blockId="Green" block="绿色"
+    //% blockId="Green" block="Green"
     Green = 0x02,
-    //% blockId="Blue" block="蓝色"
+    //% blockId="Blue" block="Blue"
     Blue = 0x03,
-    //% blockId="White" block="白色"
+    //% blockId="White" block="White"
     White = 0x04,
-    //% blockId="Black" block="黑色"
+    //% blockId="Black" block="Black"
     Black = 0x05
 }
 let CarDirState = -1
@@ -19,13 +19,13 @@ namespace HelloMaker_显示类 {
     let lhRGBLight_: DlbitRGBLight.LHDlbitRGBLight;
 
     export enum RGB {
-        //% block="彩灯1"
+        //% block="lamp1"
         RGB1 = 0,
-        //% block="彩灯2"
+        //% block="lamp2"
         RGB2 = 1
     }
 
-    //% blockId="initRGBLight" block="初始化 %rgb_id| %dataPin"
+    //% blockId="initRGBLight" block="Init %rgb_id| %dataPin"
     //% dataPin.defl=DigitalPin.P16
     //% weight=94
     export function initRGBLight(rgb_id: RGB, dataPin: DigitalPin) {
@@ -101,28 +101,17 @@ namespace HelloMaker_显示类 {
 //% color="#87CEEB" weight=24 icon="\uf1b6"
 namespace HelloMaker_传感器类 {
 
-    export enum enVoice {
-        //% blockId="Voice" block="有声音"
-        Voice = 0,
-        //% blockId="NoVoice" block="无声音"
-        NoVoice = 1
-    }
-    export enum enIR {
-        //% blockId="Get" block="检测到"
-        Get = 0,
-        //% blockId="NoVoice" block="未检测到"
-        NoGet = 1
-    }
-    export enum enOK {
-        //% blockId="NotOK" block="异常"
-        NotOK = 0,
-        //% blockId="OK" block="正常"
-        OK = 1
+   
+    export enum SensorStatus {
+        //% blockId=Detect block="Detect"
+        Detect = 0,
+        //% blockId=NoDetect block="No Detect"
+        NoDetect = 1
     }
     export enum dataType {
-        //% blockId="humidity" block="湿度"
+        //% blockId=humidity block="humidity"
         humidity,
-        //% blockId="temperature" block="温度"
+        //% blockId=temperature block="temperature"
         temperature
     }
 
@@ -379,7 +368,7 @@ namespace HelloMaker_传感器类 {
         return val;
     }
 
-    //% blockId=HelloMaker_initColorSensor block="initColorSensor|value %value"
+    //% blockId=initColorSensor block="initColorSensor"
     //% weight=95
     //% blockGap=10
     //% color="#87CEEB"
@@ -393,7 +382,7 @@ namespace HelloMaker_传感器类 {
     /*
  *  Color sensor to obtain color value.
  */
-    //% weight=84 blockId=HelloMaker_checkCurrentColor block="checkCurrentColor|color %color" 
+    //% weight=84 blockId=checkCurrentColor block="checkCurrentColor|color %color" 
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -446,7 +435,7 @@ namespace HelloMaker_传感器类 {
         return (color == t);
     }
 
-    //% block="温湿度传感器：%dataPin"
+    //% blockId=queryData block="Temperature and humidity sensor%dataPin"
     //% pullUp.defl=true
     //% dataPin.defl=DigitalPin.P6
     //% blockExternalInputs=true
@@ -511,7 +500,7 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    //% block="读取温湿度传感器%Measuredata测量结果"
+    //% blockId=readData block="Get %Measuredata sensor result"
     export function readData(Measuredata: dataType): number {
         return Measuredata == dataType.humidity ? _humidity : _temperature
     }
@@ -519,16 +508,16 @@ namespace HelloMaker_传感器类 {
     /**
     * Determind if last query is successful (checksum ok)
     */
-    //% block="温湿度传感器测量成功"
+    //% blockId="readDataSuccessful" block="Temperature and humidity sensor finish a measurement ?"
     export function readDataSuccessful(): boolean {
         return _readSuccessful
     }
 
 
 
-    //% block="声音传感器：%dataPin|%value|声音"
+    //% blockId=Voice_Sensor block="Voice Sensor %dataPin|%value Voice"
     //% dataPin.defl=DigitalPin.P7
-    export function Voice_Sensor(dataPin: DigitalPin, value: enVoice): boolean {
+    export function Voice_Sensor(dataPin: DigitalPin, value: SensorStatus): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
         if (pins.digitalReadPin(dataPin) == value) {
@@ -539,9 +528,9 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% block="倾斜传感器：%dataPin|%value|倾斜"
+    //% blockId=Incline_Sensor block=" Tilt Sensor：%dataPin|%value|Incline"
     //% dataPin.defl=DigitalPin.P9
-    export function Incline_Sensor(dataPin: DigitalPin, value: enIR): boolean {
+    export function Incline_Sensor(dataPin: DigitalPin, value: SensorStatus): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
         if (pins.digitalReadPin(dataPin) == value) {
@@ -553,9 +542,9 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    //% block="烟雾传感器：%dataPin|%value|烟雾"
+    //% blockId=Smog_Sensor block="Smog Sensor %dataPin|%value|Smog"
     //% dataPin.defl=DigitalPin.P13
-    export function Smog_Sensor(dataPin: DigitalPin, value: enIR): boolean {
+    export function Smog_Sensor(dataPin: DigitalPin, value: SensorStatus): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
         if (pins.digitalReadPin(dataPin) == value) {
@@ -567,9 +556,9 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    //% block="触摸传感器：%dataPin|%value|触摸"
+    //% blockId=Touch_Sensor block="Touch Sensor：%dataPin|%value|Touch"
     //% dataPin.defl=DigitalPin.P13
-    export function Touch_Sensor(dataPin: DigitalPin, value: enIR): boolean {
+    export function Touch_Sensor(dataPin: DigitalPin, value: SensorStatus): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
         if (pins.digitalReadPin(dataPin) == value) {
@@ -580,9 +569,9 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% block="烟雾传感器：%dataPin|%value|光照"
+    //% blockId=Photosensitive_Sensor block="Photosensitive Sensor%dataPin|%value|light"
     //% dataPin.defl=DigitalPin.P8
-    export function Photosensitive_Sensor(dataPin: DigitalPin, value: enIR): boolean {
+    export function Photosensitive_Sensor(dataPin: DigitalPin, value: SensorStatus): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
         if (pins.digitalReadPin(dataPin) == value) {
@@ -593,7 +582,7 @@ namespace HelloMaker_传感器类 {
         }
 
     }
-    //% blockId=HelloMaker_Potentiometer block="电位器数值"
+    //% blockId=Potentiometer block="Potentiometer value"
     //% weight=100
     //% blockGap=10
     //% color="#87CEEB"
@@ -605,9 +594,9 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    //% block="按键模块：%dataPin|%value|按下"
+    //% blockId=KeyDetect block="Button：%dataPin|%value|Press"
     //% dataPin.defl=DigitalPin.P8
-    export function KeyDetect(dataPin: DigitalPin, value: enIR): boolean {
+    export function KeyDetect(dataPin: DigitalPin, value: SensorStatus): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
         if (pins.digitalReadPin(dataPin) == value) {
@@ -619,9 +608,9 @@ namespace HelloMaker_传感器类 {
 
     }
 
-    //% block="火焰传感器：%dataPin|%value|火焰"
+    //% blockId=Flame_Sensor block="Flame Sensor：%dataPin|%value|Flame"
     //% dataPin.defl=DigitalPin.P14
-    export function Flame_Sensor(dataPin: DigitalPin, value: enIR): boolean {
+    export function Flame_Sensor(dataPin: DigitalPin, value: SensorStatus): boolean {
 
         pins.setPull(dataPin, PinPullMode.PullUp);
         if (pins.digitalReadPin(dataPin) == value) {
@@ -678,15 +667,15 @@ namespace HelloMaker_小车类 {
         Sensor4 = 3
     }
     export enum enLineState {
-        //% blockId="White" block="白线"
+        //% blockId="White" block="White Line"
         White = 0,
-        //% blockId="Black" block="黑线"
+        //% blockId="Black" block="Black Line"
         Black = 1
     }
     export enum enAvoidState {
-        //% blockId="OBSTACLE" block="有"
+        //% blockId="OBSTACLE" block="Detect"
         OBSTACLE = 0,
-        //% blockId="NOOBSTACLE" block="无"
+        //% blockId="NOOBSTACLE" block="No Detect"
         NOOBSTACLE = 1
     }
     export enum NumAvoidSensor {
@@ -696,76 +685,76 @@ namespace HelloMaker_小车类 {
         Sensor2 = 1
     }
     export enum enServo {
-        //% blockId="S1" block="舵机1"
+        //% blockId="S1" block="Servo 1"
         S1 = 1,
-        //% blockId="S2" block="舵机2"
+        //% blockId="S2" block="Servo 2"
         S2,
-        //% blockId="S3" block="舵机3"
+        //% blockId="S3" block="Servo 3"
         S3,
-        //% blockId="S4" block="舵机4"
+        //% blockId="S4" block="Servo 4"
         S4
     }
     export enum CarRunState {
-        //% blockId="Car_Normal" block="正常"
+        //% blockId="Car_Normal" block="Normal"
         Car_Normal = 0,
-        //% blockId="Car_XunJi" block="寻迹"
+        //% blockId="Car_XunJi" block="line_tracking"
         Car_XunJi = 1,
-        //% blockId="Car_BiZhang" block="避障"  
+        //% blockId="Car_BiZhang" block="obstacle avoidance"  
         Car_BiZhang = 2
 
     }
     export enum MotorNum {
-        //% blockId="Motor0" block="电机1"
+        //% blockId="Motor0"  block="Motor 1"
         Motor0 = 0,
-        //% blockId="Motor1"  block="电机2"
+        //% blockId="Motor1"  block="Motor 2"
         Motor1 = 1,
-        //% blockId="Motor2" block="电机3"
+        //% blockId="Motor2"  block="Motor 3"
         Motor2 = 2,
-        //% blockId="Motor3"  block="电机4"
+        //% blockId="Motor3"  block="Motor 4"
         Motor3 = 3
 
     }
     export enum MotorDir {
-        //% blockId="clockwise" block="正转"
+        //% blockId="clockwise" block="clockwise"
         clockwise = 0,
-        //% blockId="anticlockwise" block="反转"
+        //% blockId="anticlockwise" block="contrarotate "
         anticlockwise = 1
     }
     export enum CarState {
-        //% blockId="Car_Run" block="前行"
+        //% blockId="Car_Run" block="go forward"
         Car_Run = 1,
-        //% blockId="Car_Back" block="后退"
+        //% blockId="Car_Back" block="retreat"
         Car_Back,
-        //% blockId="Car_Left" block="左转"
+        //% blockId="Car_Left" block="turn left"
         Car_Left,
-        //% blockId="Car_Right" block="右转"
+        //% blockId="Car_Right" block="turn right"
         Car_Right,
-        //% blockId="Car_LeftSlide" block="左滑动"
+        //% blockId="Car_LeftSlide" block="swipeleft"
         Car_LeftSlide,
-        //% blockId="Car_RightSlide" block="右滑动"
+        //% blockId="Car_RightSlide" block="swiperight"
         Car_RightSlide,
-        //% blockId="Car_SpinLeft" block="原地左旋"
+        //% blockId="Car_SpinLeft" block="contrarotate"
         Car_SpinLeft,
-        //% blockId="Car_SpinRight" block="原地右旋"
+        //% blockId="Car_SpinRight" block="clockwise"
         Car_SpinRight,
-        //% blockId="Car_SpeedUp" block="加速"
+        //% blockId="Car_SpeedUp" block="speed up"
         Car_SpeedUp,
-        //% blockId="Car_SpeedDown" block="减速"
+        //% blockId="Car_SpeedDown" block="speed down"
         Car_SpeedDown,
-        //% blockId="Car_Stop" block="停止"
+        //% blockId="Car_Stop" block="stop"
         Car_Stop
 
     }
     export enum BalanceCarState {
-        //% blockId="Balance_Run" block="前行"
+        //% blockId="Balance_Run" block="go forward"
         Balance_Run = 1,
-        //% blockId="Balance_Back" block="后退"
+        //% blockId="Balance_Back" block="retreat"
         Balance_Back = 2,
-        //% blockId="Balance_Left" block="左转"
+        //% blockId="Balance_Left" block="turn left"
         Balance_Left = 3,
-        //% blockId="Balance_Right" block="右转"
+        //% blockId="Balance_Right" block="turn right"
         Balance_Right = 4,
-        //% blockId="Balance_Stop" block="停止"
+        //% blockId="Balance_Stop" block="stop"
         Balance_Stop = 5
 
     }
@@ -989,7 +978,7 @@ namespace HelloMaker_小车类 {
             car_speed -= 10;
     }
 
-    //% blockId=HelloMaker_ultrasonic_car block="超声波快速测距得到的结果为(cm)"
+    //% blockId=ultrasonic_car block="ultrasonic rangefinder fast result (cm)"
     //% color="#006400"
     //% weight=98
     //% blockGap=10
@@ -1012,7 +1001,7 @@ namespace HelloMaker_小车类 {
         return Math.floor(d / 40);
 
     }
-    //% blockId=PreciseUltrasonic block="超声波精准测距得到结果为（cm）"
+    //% blockId=PreciseUltrasonic block="ultrasonic rangefinder precise result(cm)"
     export function PreciseUltrasonic(): number {
         let distance = 0
         for (let i = 0; i < 5; i++) {
@@ -1031,7 +1020,7 @@ namespace HelloMaker_小车类 {
     }
 
 
-    //% blockId=HelloMaker_Servo_Car block="Servo_Car|num %num|%value |速度 %speed"
+    //% blockId=Servo_Car block="Servo_Car|num %num|%value |Speed %speed"
     //% weight=96
     //% blockGap=10
     //% speed.min=1 speed.max=10
@@ -1095,7 +1084,7 @@ namespace HelloMaker_小车类 {
         //    else if (num == 6) { value6_past = value; }
     }
 
-    //% blockId=HelloMaker_Avoid_Sensor block="红外避障传感器| %num| %dataPin|%value检测到障碍物" 
+    //% blockId=Avoid_Sensor block="Infrared ranging sensor| %num| %dataPin|%value barrier " 
     //% weight=95
     //% blockGap=10
     //% color="#006400"
@@ -1146,12 +1135,12 @@ namespace HelloMaker_小车类 {
         }
         return temp;
     }
-    //% blockId=HelloMaker_Line_Sensor block="Line_Sensor|direct %direct|%value"
+    //% blockId=GrayscaleSensor block="Grayscale Sensor|direct %direct|%value"
     //% weight=94
     //% blockGap=10
     //% color="#006400"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
-    export function Line_Sensor(direct: enPos, value: enLineState): boolean {
+    export function GrayscaleSensor(direct: enPos, value: enLineState): boolean {
         let temp: boolean = false;
         let IIC_data = 0
         IIC_data = pins.i2cReadNumber(45, NumberFormat.UInt8LE, false)
@@ -1212,7 +1201,7 @@ namespace HelloMaker_小车类 {
         }
         return temp;
     }
-    //% blockId=HelloMaker_CarCtrl block="CarCtrl|%index"
+    //% blockId=CarCtrl block="CarCtrl|%index"
     //% weight=93
     //% blockGap=10
     //% color="#006400"
@@ -1230,7 +1219,7 @@ namespace HelloMaker_小车类 {
             case CarState.Car_SpeedDown: Car_SpeedDown(); break;
         }
     }
-    //% blockId=HelloMaker_CarCtrlSpeed block="CarCtrlSpeed|%index|speed %speed"
+    //% blockId=CarCtrlSpeed block="CarCtrlSpeed|%index|speed %speed"
     //% weight=92
     //% blockGap=10
     //% speed.min=0 speed.max=255
@@ -1280,74 +1269,13 @@ namespace HelloMaker_小车类 {
         }
     }
 
-    /*
- 
-     //% blockId=HelloMaker_BluetoothCarControl block="机器人接收蓝牙命令|%uartData"
-     export function BluetoothCarControl(UartData: string): void {
-         let start_num = UartData.indexOf("*@")
-         if (UartData.indexOf("l-Z") != -1) {
-             startAvoid = true
-         } else {
-             startAvoid = false
-             if (UartData.indexOf("-S") != -1) {
-                 CarDirState = 1
-             } else if (UartData.indexOf("l-B") != -1) {
-                 CarDirState = 2
-             } else if (UartData.indexOf("l-L") != -1) {
-                 CarDirState = 3
-             } else if (UartData.indexOf("l-R") != -1) {
-                 CarDirState = 4
-             } else if (UartData.indexOf("l-0") != -1) {
-                 CarDirState = 11
-             }
-             else if (UartData.indexOf("lig") != -1) {
-                 let rgb_id = parseInt(UartData.substr(start_num + 6, 1))
-                 let rgb_color = parseInt(UartData.substr(start_num + 8, 1))
-                 let rgb_bright = parseInt(UartData.substr(start_num + 10, 3))
-                 if (rgb_id != 0) {
-                     if (rgb_color == 5) {
-                         rgb_color = 6
-                     } else if (rgb_color == 6) {
-                         rgb_color = 5
-                     } else if (rgb_color == 8) {
-                         rgb_color = 9
-                     }
-                     if (rgb_id == 1) {
-                         HelloMaker_显示类.setPixelRGB(0, rgb_color)
-                     }
-                     else if (rgb_id == 2) {
-                         HelloMaker_显示类.setPixelRGB(1, rgb_color)
-                     }
- 
-                     HelloMaker_显示类.setBrightness(rgb_bright * 2.5)
-                     HelloMaker_显示类.showLight()
- 
-                 }
-                 else {
-                     HelloMaker_显示类.clearLight()
-                 }
- 
- 
-             }
- 
- 
- 
-         }
-     }
- 	
-     //% blockId=CarModeState block="当前为避障模式"
-     export function CarModeState(): boolean {
- 
-         return startAvoid
-     }
-     */
-    //% blockId=DirectionState block="机器人运动方向"
+    //% blockId=DirectionState block="Direction of robot motion"
     export function DirectionState(): number {
 
         return CarDirState
     }
 
-    //% blockId=DirectionStateParam block="机器人运动状态：%index"
+    //% blockId=DirectionStateParam block="Direction of robot motion%index"
     export function DirectionStateParam(index: CarState): boolean {
 
         return (CarDirState == index)
@@ -1464,45 +1392,45 @@ namespace HelloMaker_积木类 {
 
 
     export enum CMD_TYPE {
-        //% block="手机编程-直行"
+        //% block="Mobile phone programming: Go straight"
         MST,
-        //% block="手机编程-转弯"
+        //% block="Mobile phone programming: Cornering"
         DST,
-        //% block="手机编程-RGB彩灯"
+        //% block="Mobile phone programming: RGB lamb"
         LIG,
-        //% block="手机编程-颜色识别"
+        //% block="Mobile phone programming: Color Recognition"
         COL,
-        //% block="手机编程-音调"
+        //% block="Mobile phone programming: Tone"
         TON,
-        //% block="手机编程-版本号"
+        //% block="Mobile phone programming: APP Version"
         VER,
-        //% block="手机编程-数字显示"
+        //% block="Mobile phone programming: Show number"
         POS,
-        //% block="显示屏-字符显示"
+        //% block="Mobile phone programming: Show number"
         SEN,
-        //% block="手机编程-温度"
+        //% block="Mobile phone programming: Temperature"
         TEM,
-        //% block="寻迹传感器状态"
+        //% block="Mobile phone programming: get Grayscale Sensor data"
         STA,
-        //% block="手机编程-PWM舵机""
+        //% block="Mobile phone programming: PWM servo"
         SERVO_MOVE,
-        //% block="控制单舵机"
+        //% block="Control Single servo"
         SERVO_ONE,
-        //% block="运行舵机动作组"
+        //% block="Run Single group"
         SERVO_GROUP,
-        //% block="机器人运动模式"
+        //% block="Robot motion mode"
         STM32_MOVE,
-        //% block="机器人避障模式"
+        //% block="Robot evade obstacle"
         ROBOT_MODE_BIZHANG,
-        //% block="机器人寻迹模式"
+        //% block="Robot Tracing model"
         ROBOT_MODE_XUNJI,
-        //% block="机器人速度调整"
+        //% block="Robot adjust speed"
         ROBOT_SPEED_ADJUST,
-        //% block="手机编程-总线舵机"
+        //% block="Mobile phone programming: Bus Servo"
         GP_BUSSERVO,
-		//% block="控制车载机械臂"
+		//% block="Control Vehicle-mounted mechanical arm"
 		DCARM,
-        //% block="无效指令"
+        //% block="Invalid instruction "
 		ERROR
     }
     let CMD_MULT_SERVO_MOVE = 3
@@ -1600,7 +1528,7 @@ namespace HelloMaker_积木类 {
         UartSend2data(type)
     }
 
-    //% blockId=HelloMaker_SendRGBColor block="SendRGBColor"
+    //% blockId=SendRGBColor block="SendRGBColor"
     //% weight=96
     //% blockGap=10
     //% objColor.min=1 objColor.max=3
@@ -1614,7 +1542,7 @@ namespace HelloMaker_积木类 {
         UartSend2data(CMD_RGB_DETECT)
         serial.writeNumber(objColor)
     }
-    //% blockId=HelloMaker_SendBarrierDistance block="SendBarrierDistance"
+    //% blockId=SendBarrierDistance block="SendBarrierDistance"
     //% weight=96
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
@@ -1628,7 +1556,7 @@ namespace HelloMaker_积木类 {
         UartSend3data(distance)
     }
 
-    //% blockId=HelloMaker_BuildingBlocksInit block="BuildingBlocksInit"
+    //% blockId=BuildingBlocksInit block="BuildingBlocksInit"
     //% weight=96
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
@@ -1646,7 +1574,7 @@ namespace HelloMaker_积木类 {
 
     }
 
-    //% blockId=RobotMove block="蓝牙控制机器人运动"
+    //% blockId=RobotMove block="motion control of robot by app"
     export function RobotMove() {
 
         switch (Move_T) {
@@ -1687,7 +1615,7 @@ namespace HelloMaker_积木类 {
         //  SendMoveTypeToMcu(Move_T)
 
     }
-    //% blockId=ServoOne block="蓝牙-单舵机运动"
+    //% blockId=ServoOne block="single servo control via app"
     export function ServoOne() {
         let Angle = 0
         //    SendOneServoToMcu(100, Stm32_ID, Stm32_POS)
@@ -1695,12 +1623,12 @@ namespace HelloMaker_积木类 {
         HelloMaker_小车类.Servo_Car(Stm32_ID, Angle, 0)
 
     }
-    //% blockId=ServoGroup block="蓝牙-舵机动作组"
+    //% blockId=ServoGroup block="Multi servo control via app"
     export function ServoGroup() {
         SendServoGroupToMcu(Stm32_GROUP, 1)
 
     }
-	//% blockId=ArmClaw block="蓝牙-车载机械臂"
+	//% blockId=ArmClaw block="Vehicle-mounted mechanical arm control via app"
     export function ArmClaw() {
         let Angle = 0
         Angle = Math.map(claw, 0, 1000, 0, 180)
@@ -1724,13 +1652,13 @@ namespace HelloMaker_积木类 {
 		
     }
 	
-	//% blockId=Current_cmd block="蓝牙命令"
+	//% blockId=Current_cmd block="APP cmd"
     export function Current_cmd() :number{
 		
 		return cmdType
 		
 	}
-    //% blockId=AppProgramMove block="手机编程-机器人直行"
+    //% blockId=AppProgramMove block="Mobile phone programming:Robot goes straight"
     export function AppProgramMove() {
         if (move == 1) {
             HelloMaker_小车类.CarCtrlSpeed(HelloMaker_小车类.CarState.Car_Run, speed * 2.5)
@@ -1748,7 +1676,7 @@ namespace HelloMaker_积木类 {
         }
     }
 
-    //% blockId=AppProgramRotate block="手机编程-机器人旋转"
+    //% blockId=AppProgramRotate block="Mobile phone programming:Robot rotation"
     export function AppProgramRotate() {
 
         if (direction == 1) {  // right
@@ -1767,7 +1695,7 @@ namespace HelloMaker_积木类 {
         }
     }
 
-    //% blockId=AppProgramRGB block="手机编程-RGB彩灯"
+    //% blockId=AppProgramRGB block="Mobile phone programming:RGB lamb"
     export function AppProgramRGB() {
         if (rgb_id != 0) {
             if (rgb_color == 5) {
@@ -1793,7 +1721,7 @@ namespace HelloMaker_积木类 {
         }
 
     }
-    //% blockId=AppProgramColorDetect block="手机编程-颜色识别"
+    //% blockId=AppProgramColorDetect block="Mobile phone programming:Color detect "
     export function AppProgramColorDetect() {
 
         if (HelloMaker_传感器类.checkCurrentColor(color_id) == true) {
@@ -1805,14 +1733,14 @@ namespace HelloMaker_积木类 {
             bluetooth.uartWriteString("*@col-0#")
         }
     }
-    //% blockId=AppProgramPwmServo block="手机编程-PWM舵机运动"
+    //% blockId=AppProgramPwmServo block="Mobile phone programming:PWM Servo control"
     export function AppProgramPwmServo() {
 
         HelloMaker_小车类.Servo_Car(dlbot_id, dlbot_pos, dlbot_speed)
 
     }
 
-    //% blockId=AppProgramBusServo block="手机编程-总线舵机运动"
+    //% blockId=AppProgramBusServo block="Mobile phone programming:BUS Servo control"
     export function AppProgramBusServo() {
 
 
@@ -1820,29 +1748,29 @@ namespace HelloMaker_积木类 {
 
     }
 
-    //% blockId=AppProgramVersion block="手机编程-软件版本号"
+    //% blockId=AppProgramVersion block="Mobile phone programming:Software version"
     export function AppProgramVersion() {
         bluetooth.uartWriteString("*@HelloMakerbit_V0#")
 
     }
 
-    //% blockId=AppProgramShowNumber block="手机编程-数字显示"
+    //% blockId=AppProgramShowNumber block="Mobile phone programming:Show Number"
     export function AppProgramShowNumber() {
         basic.showNumber(show_number)
     }
-    //% blockId=AppProgramShowString block="手机编程-字符串显示"
+    //% blockId=AppProgramShowString block="Mobile phone programming:Show String"
     export function AppProgramShowString() {
         basic.showString(stringReceive)
     }
 
-    //% blockId=AppProgramTone block="音调"
+    //% blockId=AppProgramTone block="Tone"
     export function AppProgramTone(): number {
 
         return Tone[tone]
 
     }
 
-    //% blockId=AppProgramBeat block="节拍"
+    //% blockId=AppProgramBeat block="Beat"
     export function AppProgramBeat(): number {
 
         return music.beat(Beat[dlbot_beat])
@@ -1850,18 +1778,18 @@ namespace HelloMaker_积木类 {
     }
 
 
-    //% blockId=AppProgramxunjiState block="手机编程-寻迹传感器状态"
+    //% blockId=AppProgramxunjiState block="Mobile phone programming:Grayscale Sensor data"
     export function AppProgramxunjiState() {
 
         bluetooth.uartWriteString("*@sta" + pins.i2cReadNumber(45, NumberFormat.UInt8LE, false) + "#")
     }
-    //% blockId=AppProgramTemper block="手机编程-温度传感器数据"
+    //% blockId=AppProgramTemper block="Mobile phone programming:temperature sensor data"
     export function AppProgramTemper() {
         let wendu = input.temperature()
         bluetooth.uartWriteString("*@tem-" + wendu + "#")
     }
 
-    //% blockId=APPCmd block="手机APP命令类型为 %type"
+    //% blockId=APPCmd block="command send by APP %type"
 
     export function APPCmd(type: CMD_TYPE): boolean {
 
@@ -1880,14 +1808,14 @@ namespace HelloMaker_积木类 {
 
     }
 
-    //% blockId=APPSpeed block="蓝牙-机器人运动速度"
+    //% blockId=APPSpeed block="The speed set via app"
 
     export function APPSpeed(): number {
 
         return (dl_CarSpeed * 2.5)
 
     }
-    //% blockId=HelloMaker_BuildingBlocks block="BuildingBlocks|%uartData"
+    //% blockId=BuildingBlocks block="BuildingBlocks|%uartData"
     //% weight=96
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=9
@@ -1959,7 +1887,7 @@ namespace HelloMaker_积木类 {
                         Stm32_ID = parseInt(uartData.substr(start_num + 14, 1))
                         cmdType = CMD_TYPE.SERVO_ONE
                     }
-					else if (uartData.charAt(5) == "2")  {
+					else if (uartData.charAt(5) == '2')  {
 								claw = parseInt(uartData.substr(start_num + 7, 4))
 								arm =  parseInt(uartData.substr(start_num + 12, 4))
 								cmdType = CMD_TYPE.DCARM				
