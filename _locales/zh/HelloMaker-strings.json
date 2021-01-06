@@ -110,7 +110,7 @@
   "HelloMaker_积木类.CMD_TYPE.DCARM|block": "控制车载机械臂",
   "HelloMaker_积木类.CMD_TYPE.ERROR|block": "无效指令",
   "HelloMaker_积木类.SendRGBColor|block": "发送物体颜色%objColor",
-  "HelloMaker_积木类.SendBarrierDistance|block": "发送物体距离%distance"
+  "HelloMaker_积木类.SendBarrierDistance|block": "发送物体距离%distance",
   "HelloMaker_积木类.BuildingBlocksInit|block": "深联积木初始化",
   "HelloMaker_积木类.RobotMove|block": "蓝牙控制机器人运动",
   "HelloMaker_积木类.ServoOne|block": "蓝牙-单舵机运动",
