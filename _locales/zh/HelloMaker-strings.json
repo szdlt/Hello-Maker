@@ -1,4 +1,13 @@
 {
+  "DlbitRGBColors.Red|block":"红",
+  "DlbitRGBColors.Orange|block":"橙",
+  "DlbitRGBColors.Yellow|block":"黄",
+  "DlbitRGBColors.Green|block":"绿",
+  "DlbitRGBColors.Blue|block":"蓝",
+  "DlbitRGBColors.Indigo|block":"靛",
+  "DlbitRGBColors.Violet|block":"蓝紫",
+  "DlbitRGBColors.Purple|block":"紫",
+  "DlbitRGBColors.White|block":"白",
   "Colors.Red|block":"红",
   "Colors.Green|block":"绿",
   "Colors.Blue|block":"蓝",
