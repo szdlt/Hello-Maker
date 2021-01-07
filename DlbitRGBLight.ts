@@ -3,23 +3,23 @@
  */
 
 enum DlbitRGBColors {
-    //% block=红
+    //% block="Red"
     Red = 1,
-    //% block=橙
+    //% block="Orange"
     Orange = 2,
-    //% block=黄
+    //% block="Yellow"
     Yellow = 3,
-    //% block=绿
+    //% block="Green"
     Green = 4,
-    //% block=蓝
+    //% block="Blue"
     Blue = 5,
-    //% block=靛
+    //% block="Indigo"
     Indigo = 6,
-    //% block=蓝紫
+    //% block="Violet"
     Violet = 7,
-    //% block=紫
+    //% block="Purple"
     Purple = 8,
-    //% block=白
+    //% block="White"
     White = 9
 }
 
