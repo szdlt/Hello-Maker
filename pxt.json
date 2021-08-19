@@ -4,7 +4,8 @@
     "description": "Extension for HelloMaker:bit",
     "license": "MIT",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "bluetooth"
     },
     "files": [
         "README.md",
